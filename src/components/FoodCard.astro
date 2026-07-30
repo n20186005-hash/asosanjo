@@ -1,0 +1,26 @@
+---
+import Icon from './Icon.astro';
+import type { FoodSpot } from '../data/content';
+interface Props { spot: FoodSpot; index: number }
+const { spot, index } = Astro.props;
+---
+<article class="group border-t hairline py-7 md:grid md:grid-cols-[5rem_1fr_1.15fr] md:gap-7">
+  <div class="flex items-center justify-between md:block">
+    <p class="font-serif text-2xl text-earth">{String(index + 1).padStart(2, '0')}</p>
+    <span class="border border-moss/25 px-2 py-1 text-[0.64rem] font-bold tracking-[0.1em] text-moss md:mt-4 md:inline-flex">{spot.tag}</span>
+  </div>
+  <div class="mt-4 md:mt-0">
+    <p class="text-[0.68rem] font-bold tracking-[0.16em] text-moss">{spot.area}</p>
+    <h3 class="mt-2 text-xl leading-8 md:text-2xl">{spot.name}</h3>
+    <div class="mt-4 grid gap-2 text-xs leading-6 text-ink-soft">
+      <p class="flex gap-2"><Icon name="route" size={16} class="mt-1 shrink-0" />{spot.access}</p>
+      <p class="flex gap-2"><Icon name="clock" size={16} class="mt-1 shrink-0" />{spot.hours}</p>
+    </div>
+  </div>
+  <div class="mt-5 border-l hairline pl-5 md:mt-0">
+    <ul class="flex flex-wrap gap-x-4 gap-y-2 text-sm font-bold">
+      {spot.specialties.map((item) => <li>・{item}</li>)}
+    </ul>
+    <p class="mt-4 text-sm leading-7 text-ink-soft">{spot.note}</p>
+  </div>
+</article>

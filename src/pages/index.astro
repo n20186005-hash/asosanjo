@@ -1,0 +1,140 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Icon from '../components/Icon.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import StatusPanel from '../components/StatusPanel.astro';
+import RouteDiagram from '../components/RouteDiagram.astro';
+import FaqList from '../components/FaqList.astro';
+import { HIGHLIGHTS, FOOD_SPOTS } from '../data/content';
+---
+<BaseLayout preloadImage="/images/hero.webp">
+  <section class="relative min-h-[760px] overflow-hidden bg-ink text-white md:min-h-[860px]">
+    <picture class="absolute inset-0">
+      <source media="(max-width: 767px)" srcset="/images/hero-mobile.webp" />
+      <img src="/images/hero.webp" alt="草千里の高台から望む阿蘇中岳の火山地形" class="h-full w-full object-cover" width="1920" height="1080" fetchpriority="high" />
+    </picture>
+    <div class="absolute inset-0 bg-[linear-gradient(90deg,rgba(22,25,22,.83)_0%,rgba(22,25,22,.45)_55%,rgba(22,25,22,.18)_100%)]"></div>
+    <div class="absolute inset-x-0 bottom-0 h-64 bg-linear-to-t from-ink/70 to-transparent"></div>
+
+    <div class="site-container relative flex min-h-[760px] items-end pb-20 pt-36 md:min-h-[860px] md:pb-28">
+      <div class="max-w-4xl">
+        <p class="mb-6 flex items-center gap-3 text-xs font-bold tracking-[0.2em] text-sulfur before:h-px before:w-10 before:bg-sulfur">ASO SANJO / KUMAMOTO</p>
+        <h1 class="text-[2.7rem] leading-[1.35] tracking-[0.08em] text-white sm:text-6xl md:text-7xl lg:text-[5.25rem]">
+          火山と草原へ、<br />旅の入口。
+        </h1>
+        <p class="mt-7 max-w-2xl text-sm leading-8 text-white/78 md:text-base md:leading-9">
+          阿蘇山上広場から、草千里、中岳、砂千里へ。<br class="hidden md:block" />規制と天候を確かめながら、大地の時間をたどる旅を案内します。
+        </p>
+        <div class="mt-9 flex flex-wrap gap-3">
+          <a href="/status/" class="button-primary bg-sulfur! text-ink! hover:bg-white!">本日の案内を見る <Icon name="arrow" size={18} /></a>
+          <a href="/access/" class="button-secondary border-white/40! bg-black/20! text-white! hover:bg-white! hover:text-ink!">アクセスを調べる</a>
+        </div>
+      </div>
+      <p class="absolute bottom-9 right-0 hidden origin-bottom-right -rotate-90 text-[0.62rem] tracking-[0.23em] text-white/45 lg:block">32.8799° N / 131.0740° E</p>
+    </div>
+  </section>
+
+  <StatusPanel compact={true} />
+
+  <section class="py-20 md:py-32">
+    <div class="site-container grid items-center gap-14 lg:grid-cols-[.92fr_1.08fr] lg:gap-20">
+      <div>
+        <SectionHeading eyebrow="ABOUT THE PLACE" title="山頂ではなく、山上の旅を整える場所。" description="阿蘇山上広場は、阿蘇駅からのバス、自家用車、草千里、中岳火口方面をつなぐ集散点です。隣接する阿蘇山上ターミナルには休憩や買い物の機能があり、山の状況を確認して次の行動を決められます。" />
+        <div class="mt-8 border-l-2 border-sulfur pl-5 text-sm leading-8 text-ink-soft">
+          <p>火口はいつでも入れる場所ではありません。規制、火山ガス、濃霧、積雪によって行程を変える余白を持つことが、阿蘇山上を楽しむ基本です。</p>
+        </div>
+        <a href="/guide/" class="button-ghost mt-8">山上の見どころへ <Icon name="arrow" size={17} /></a>
+      </div>
+      <figure class="relative pb-9 pl-0 md:pl-10">
+        <div class="image-frame aspect-[4/3]">
+          <img src="/images/crater.webp" alt="阿蘇中岳第一火口の火口壁と湯だまり" class="h-full w-full object-cover transition-transform duration-700 hover:scale-[1.02]" loading="lazy" width="1280" height="853" />
+        </div>
+        <figcaption class="absolute bottom-0 left-0 border-l border-sulfur bg-paper px-5 py-3 text-[0.68rem] tracking-[0.1em] text-ink-soft md:left-1">NAKADAKE CRATER / 火口開放時の風景</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="border-y hairline bg-paper-deep/55 py-20 md:py-28">
+    <div class="site-container">
+      <SectionHeading eyebrow="THREE PERSPECTIVES" title="阿蘇山上で出会う、三つの風景。" />
+      <div class="mt-12 grid gap-px bg-ink/15 md:grid-cols-3">
+        {HIGHLIGHTS.map((item) => (
+          <a href={item.href} class="group bg-paper p-7 no-underline transition-colors hover:bg-white md:p-9">
+            <p class="font-serif text-sm text-earth">{item.number}</p>
+            <h3 class="mt-10 text-2xl leading-9">{item.title}</h3>
+            <p class="mt-4 text-sm leading-8 text-ink-soft">{item.text}</p>
+            <span class="mt-8 inline-flex items-center gap-2 text-xs font-bold tracking-[0.08em] text-moss">詳しく見る <Icon name="arrow" size={16} /></span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="py-20 md:py-28">
+    <div class="site-container">
+      <div class="grid gap-8 md:grid-cols-[1fr_.7fr] md:items-end">
+        <SectionHeading eyebrow="MOVING THROUGH ASO" title="駅から草原、山上、火口へ。" description="阿蘇山上は一つの点ではなく、限られた交通をつないで巡るエリアです。帰りのバス時刻と規制状況を先に確認しておくと、落ち着いて動けます。" />
+        <p class="text-sm leading-7 text-ink-soft md:text-right">所要時間は目安です。混雑・天候・道路状況により変わります。</p>
+      </div>
+      <RouteDiagram />
+      <div class="mt-7 flex flex-wrap gap-3">
+        <a href="/access/" class="button-primary">交通を詳しく見る <Icon name="arrow" size={17} /></a>
+        <a href="/plan/" class="button-secondary">時間別プランを見る</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="relative min-h-[520px] overflow-hidden bg-ink text-white md:min-h-[650px]">
+    <img src="/images/panorama.webp" alt="草千里から広がる阿蘇山の火山地形" class="absolute inset-0 h-full w-full object-cover" loading="lazy" width="1440" height="850" />
+    <div class="absolute inset-0 bg-ink/45"></div>
+    <div class="site-container relative flex min-h-[520px] items-end py-16 md:min-h-[650px] md:py-24">
+      <div class="max-w-2xl border-l border-sulfur pl-6 md:pl-9">
+        <p class="text-xs font-bold tracking-[0.2em] text-sulfur">READING THE LAND</p>
+        <h2 class="mt-5 text-4xl leading-[1.45] text-white md:text-6xl">大地の層を、<br />ゆっくり読む。</h2>
+        <p class="mt-6 text-sm leading-8 text-white/75">緑の草原、黒い火山砂、噴煙、冬の白。阿蘇山上の色は、季節だけでなく、その日の風と光にも変えられます。</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-20 md:py-28">
+    <div class="site-container">
+      <div class="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+        <SectionHeading eyebrow="EAT AROUND THE MOUNTAIN" title="山上と草千里で、ひと休み。" description="山上広場内の軽食から、草千里のあか牛料理、下山後の甘味まで。距離と営業時間を分けて考えるのがポイントです。" />
+        <a href="/food/" class="button-ghost shrink-0">すべての食事案内 <Icon name="arrow" size={17} /></a>
+      </div>
+      <div class="mt-12 grid gap-px bg-ink/15 lg:grid-cols-3">
+        {FOOD_SPOTS.slice(0, 3).map((spot, index) => (
+          <article class="bg-paper p-7 md:p-8">
+            <div class="flex items-center justify-between">
+              <p class="font-serif text-sm text-earth">0{index + 1}</p>
+              <span class="text-[0.65rem] font-bold tracking-[0.1em] text-moss">{spot.area}</span>
+            </div>
+            <h3 class="mt-8 text-xl leading-8">{spot.name}</h3>
+            <p class="mt-3 text-xs leading-6 text-ink-soft">{spot.access}</p>
+            <p class="mt-5 text-sm font-bold">{spot.specialties.slice(0, 2).join('・')}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="border-y hairline bg-white/45 py-20 md:py-28">
+    <div class="site-container grid gap-12 lg:grid-cols-[.65fr_1.35fr] lg:gap-20">
+      <div>
+        <SectionHeading eyebrow="BEFORE YOU GO" title="出発前に、知っておきたいこと。" description="火口、駐車場、雨、冬の道路。よくある疑問を先に確認しておくと、現地での判断が楽になります。" />
+        <a href="/faq/" class="button-ghost mt-8">質問をすべて見る <Icon name="arrow" size={17} /></a>
+      </div>
+      <FaqList limit={4} />
+    </div>
+  </section>
+
+  <section class="bg-moss-dark py-16 text-white md:py-20">
+    <div class="site-container flex flex-col gap-8 md:flex-row md:items-center md:justify-between">
+      <div>
+        <p class="text-xs font-bold tracking-[0.18em] text-sulfur">CHECK BEFORE DEPARTURE</p>
+        <h2 class="mt-3 text-3xl leading-[1.5] text-white md:text-4xl">山の情報を確認してから、出発を。</h2>
+      </div>
+      <a href="/status/" class="button-secondary border-white/35! bg-transparent! text-white! hover:bg-white! hover:text-ink!">本日の案内へ <Icon name="arrow" size={17} /></a>
+    </div>
+  </section>
+</BaseLayout>

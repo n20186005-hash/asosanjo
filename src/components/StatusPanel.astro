@@ -1,0 +1,54 @@
+---
+import Icon from './Icon.astro';
+import { MOUNTAIN_STATUS } from '../config/status';
+
+interface Props {
+  compact?: boolean;
+  showLink?: boolean;
+}
+const { compact = false, showLink = true } = Astro.props;
+const levelClasses = {
+  open: 'status-open',
+  limited: 'status-limited',
+  closed: 'status-closed',
+  check: 'status-check',
+};
+---
+<section class:list={['border-y border-alert/20 bg-alert-soft', compact ? 'py-4' : 'py-7']} aria-labelledby="mountain-status-title">
+  <div class="site-container">
+    <div class:list={['flex flex-col gap-5', compact ? 'xl:flex-row xl:items-center xl:justify-between' : '']}>
+      <div class:list={['flex gap-3', !compact && 'md:items-start']}>
+        <span class="mt-1 grid size-9 shrink-0 place-items-center border border-alert/30 text-alert" aria-hidden="true">
+          <Icon name="alert" size={19} />
+        </span>
+        <div>
+          <p class="text-[0.68rem] font-bold tracking-[0.16em] text-alert">MOUNTAIN STATUS</p>
+          <h2 id="mountain-status-title" class:list={['mt-1 font-sans font-bold tracking-[0.04em] text-alert', compact ? 'text-sm' : 'text-lg']}>
+            {MOUNTAIN_STATUS.alert.title}
+          </h2>
+          {!compact && <p class="mt-2 max-w-3xl text-sm leading-7 text-ink-soft">{MOUNTAIN_STATUS.alert.body}</p>}
+        </div>
+      </div>
+
+      <div class:list={['grid gap-px overflow-hidden border border-alert/15 bg-alert/15', compact ? 'grid-cols-2 md:grid-cols-4 xl:min-w-[620px]' : 'grid-cols-2 lg:grid-cols-4']}>
+        {MOUNTAIN_STATUS.items.map((item) => (
+          <div class="bg-paper px-4 py-3">
+            <div class="flex items-center gap-2 text-[0.68rem] font-bold tracking-[0.08em] text-ink-soft">
+              <span class:list={['status-dot', levelClasses[item.level]]}></span>
+              {compact ? item.shortLabel : item.label}
+            </div>
+            <p class="mt-1 text-sm font-bold text-ink">{item.value}</p>
+          </div>
+        ))}
+      </div>
+
+      {showLink && (
+        <div>
+          <a href="/status/" class="button-primary">
+            詳しい案内を見る <Icon name="arrow" size={17} />
+          </a>
+        </div>
+      )}
+    </div>
+  </div>
+</section>

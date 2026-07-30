@@ -1,0 +1,64 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import Icon from '../components/Icon.astro';
+const plans = [
+  { time: '約1時間', title: '山上広場を短く歩く', steps: ['ターミナルで規制確認', '山上の眺めと写真', '茶店で休憩・お土産', '復路バスまたは車へ'], fit: '乗り継ぎ・短時間' },
+  { time: '約3時間', title: '草千里と山上をつなぐ', steps: ['草千里を散策', '博物館または昼食', '山上広場へ移動', '開放時のみ火口方面へ'], fit: '初めての阿蘇' },
+  { time: '半日', title: '火山の景観をゆっくり巡る', steps: ['午前に草千里', '博物館・昼食', '山上広場・砂千里', '下山後に内牧温泉方面'], fit: '車・余裕ある旅' },
+];
+---
+<BaseLayout title="旅のプラン｜1時間・3時間・半日の阿蘇山上" description="阿蘇山上広場と草千里を、1時間、3時間、半日で巡るモデルプラン。火口閉鎖、雨、濃霧、冬の代替案も案内します。">
+  <PageHero eyebrow="TRAVEL PLANS" title="旅の組み立て方" description="阿蘇山上では、予定を詰めるより、状況に合わせて一つ減らせる計画が向いています。時間別の基本形から選んでください。" image="/images/hero.webp" />
+
+  <section class="py-16 md:py-24">
+    <div class="site-container">
+      <SectionHeading eyebrow="TIME-BASED ROUTES" title="滞在時間から選ぶ。" />
+      <div class="mt-12 grid gap-px bg-ink/15 lg:grid-cols-3">
+        {plans.map((plan, index) => (
+          <article class="bg-paper p-7 md:p-9">
+            <div class="flex items-center justify-between"><p class="font-serif text-sm text-earth">0{index + 1}</p><span class="border border-moss/25 px-3 py-1 text-xs font-bold text-moss">{plan.time}</span></div>
+            <h2 class="mt-8 text-2xl leading-9">{plan.title}</h2>
+            <ol class="mt-7 grid gap-0">
+              {plan.steps.map((step, i) => (
+                <li class="relative border-l hairline pb-5 pl-6 last:pb-0"><span class="absolute -left-[4px] top-2 size-2 rounded-full bg-moss"></span><span class="text-sm leading-7">{step}</span></li>
+              ))}
+            </ol>
+            <p class="mt-8 border-t hairline pt-4 text-xs font-bold tracking-[0.1em] text-ink-soft">向いている人：{plan.fit}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="border-y hairline bg-paper-deep/55 py-16 md:py-24">
+    <div class="site-container">
+      <SectionHeading eyebrow="WHEN CONDITIONS CHANGE" title="見えない日、入れない日の楽しみ方。" description="火口閉鎖や濃霧は、旅の失敗ではありません。山の条件を受け入れ、学ぶ・食べる・休むへ切り替えます。" />
+      <div class="mt-12 grid gap-7 md:grid-cols-3">
+        {[
+          { icon: 'alert' as const, title: '火口閉鎖', text: '草千里、阿蘇火山博物館、山上ターミナルを中心に。規制区域の外から火山地形を観察します。' },
+          { icon: 'rain' as const, title: '雨・濃霧', text: '博物館と食事を先にし、視界が回復したら短い散策へ。霧の中で道路脇に停車しないでください。' },
+          { icon: 'snow' as const, title: '積雪・凍結', text: '道路装備を最優先。不十分な場合は山上行きを中止し、阿蘇駅や内牧温泉周辺へ変更します。' },
+        ].map((item) => (
+          <article class="border-t-2 border-moss pt-6"><span class="text-moss"><Icon name={item.icon} size={28} /></span><h3 class="mt-5 text-2xl">{item.title}</h3><p class="mt-4 text-sm leading-8 text-ink-soft">{item.text}</p></article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="py-16 md:py-24">
+    <div class="site-container grid gap-12 lg:grid-cols-[.9fr_1.1fr] lg:items-center lg:gap-20">
+      <div class="image-frame aspect-[4/3]"><img src="/images/kusasenri-pond.webp" alt="池のある草千里ヶ浜" class="h-full w-full object-cover" loading="lazy" /></div>
+      <div>
+        <SectionHeading eyebrow="A CALM ITINERARY" title="行程に、余白を残す。" description="山上では移動、駐車、バス待ち、規制確認に時間がかかります。次の予約を詰めすぎず、下山時刻だけは明確にしておくのがおすすめです。" />
+        <div class="mt-8 grid gap-4 text-sm leading-7 text-ink-soft">
+          <p class="flex gap-3"><Icon name="check" size={18} class="mt-1 shrink-0 text-moss" />公共交通は最終便から逆算する</p>
+          <p class="flex gap-3"><Icon name="check" size={18} class="mt-1 shrink-0 text-moss" />昼食は営業時間の早い山上から決める</p>
+          <p class="flex gap-3"><Icon name="check" size={18} class="mt-1 shrink-0 text-moss" />火口閉鎖時の代替先を一つ用意する</p>
+        </div>
+        <a href="/status/" class="button-primary mt-8">出発前の確認へ <Icon name="arrow" size={17} /></a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

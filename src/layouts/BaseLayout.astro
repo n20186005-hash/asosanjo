@@ -1,0 +1,100 @@
+---
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { SITE } from '../config/site';
+
+interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+  noindex?: boolean;
+  preloadImage?: string;
+  structuredData?: Record<string, unknown> | Array<Record<string, unknown>>;
+}
+
+const {
+  title = SITE.defaultTitle,
+  description = SITE.description,
+  image = '/images/og.jpg',
+  noindex = false,
+  preloadImage,
+  structuredData,
+} = Astro.props;
+
+const canonical = new URL(Astro.url.pathname, SITE.url).toString();
+const absoluteImage = new URL(image, SITE.url).toString();
+const defaultStructuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'TouristAttraction',
+  name: '阿蘇山上広場',
+  alternateName: ['Aso Sanjo Public Square', '阿蘇山上ターミナル周辺'],
+  description: SITE.description,
+  url: canonical,
+  image: absoluteImage,
+  address: {
+    '@type': 'PostalAddress',
+    addressRegion: '熊本県',
+    addressLocality: '阿蘇市',
+    streetAddress: '黒川1808',
+    addressCountry: 'JP',
+  },
+  geo: {
+    '@type': 'GeoCoordinates',
+    latitude: SITE.coordinates.latitude,
+    longitude: SITE.coordinates.longitude,
+  },
+  touristType: ['自然観光', '火山景観', 'ドライブ', '公共交通旅行'],
+};
+const schema = structuredData ?? defaultStructuredData;
+---
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="theme-color" content="#242722" />
+    <meta name="format-detection" content="telephone=no" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    {noindex && <meta name="robots" content="noindex,nofollow" />}
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" type="image/svg+xml" href="/icons/favicon.svg" />
+    <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png" />
+    <link rel="manifest" href="/manifest.webmanifest" />
+    {preloadImage && <link rel="preload" as="image" href={preloadImage} fetchpriority="high" />}
+
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content={SITE.locale} />
+    <meta property="og:site_name" content={SITE.name} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={absoluteImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={absoluteImage} />
+
+    <script type="application/ld+json" set:html={JSON.stringify(schema)}></script>
+
+    <script async src={`https://www.googletagmanager.com/gtag/js?id=${SITE.gaMeasurementId}`}></script>
+    <script is:inline define:vars={{ measurementId: SITE.gaMeasurementId }}>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){window.dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', measurementId, { anonymize_ip: true });
+    </script>
+  </head>
+  <body>
+    <a href="#main-content" class="fixed left-3 top-3 z-[100] -translate-y-24 bg-white px-4 py-2 text-sm font-bold text-ink transition-transform focus:translate-y-0">本文へ移動</a>
+    <Header />
+    <main id="main-content">
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>

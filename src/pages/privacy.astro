@@ -1,0 +1,27 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+---
+<BaseLayout title="プライバシーポリシー" description="阿蘇山上ガイドのアクセス解析、Cookie、免責事項について。" noindex={false}>
+  <PageHero eyebrow="PRIVACY" title="プライバシーポリシー" description="このサイトで扱うアクセス情報と、掲載内容の考え方を説明します。" compact={true} />
+  <article class="site-container-narrow content-prose py-16 text-sm leading-8 text-ink-soft md:py-24">
+    <section>
+      <h2 class="text-2xl text-ink">アクセス解析について</h2>
+      <p class="mt-5">当サイトでは、利用状況を把握し、内容や使いやすさを改善するために Google Analytics 4 を利用しています。Google Analytics は Cookie 等を使い、閲覧したページ、利用端末、地域の概況などの情報を収集する場合があります。</p>
+      <p>収集された情報は個人を直接特定する目的では利用しません。当サイトでは IP アドレスの匿名化設定を有効にしています。Cookie はブラウザの設定で無効にできますが、一部の計測が行われなくなります。</p>
+    </section>
+    <section class="mt-12 border-t hairline pt-10">
+      <h2 class="text-2xl text-ink">外部リンクについて</h2>
+      <p class="mt-5">火口規制や交通運行など、最新性と安全性が重要な情報については、阿蘇市や交通事業者の公式ページへ案内する場合があります。移動先のサイトにおける個人情報の取扱いについては、各サイトの方針をご確認ください。</p>
+    </section>
+    <section class="mt-12 border-t hairline pt-10">
+      <h2 class="text-2xl text-ink">免責事項</h2>
+      <p class="mt-5">掲載内容は作成・更新時点の情報をもとにしています。火山活動、道路規制、天候、施設営業、料金、時刻表は予告なく変更されることがあります。当サイトの情報だけで安全判断を行わず、公式発表、道路標識、現地係員の指示を優先してください。</p>
+      <p>当サイトの利用により生じた損害について、法令上責任を負う場合を除き、責任を負いかねます。</p>
+    </section>
+    <section class="mt-12 border-t hairline pt-10">
+      <h2 class="text-2xl text-ink">著作権・写真</h2>
+      <p class="mt-5">文章、レイアウト、図版等の権利は、個別に表示があるものを除き当サイトまたは正当な権利者に帰属します。写真は利用条件を確認した素材を使用し、出典とライセンスを写真クレジットページに掲載しています。</p>
+    </section>
+  </article>
+</BaseLayout>

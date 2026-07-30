@@ -1,0 +1,46 @@
+---
+import Icon from './Icon.astro';
+import { NAV_ITEMS, SITE } from '../config/site';
+const year = new Date().getFullYear();
+---
+<footer class="border-t hairline bg-ink text-white">
+  <div class="site-container py-14 md:py-20">
+    <div class="grid gap-12 md:grid-cols-[1.2fr_.8fr_.8fr]">
+      <div>
+        <a href="/" class="inline-flex items-center gap-3 text-white no-underline">
+          <span class="grid size-11 place-items-center border border-white/30 text-sulfur"><Icon name="mountain" size={23} /></span>
+          <span class="font-serif text-xl tracking-[0.12em]">{SITE.name}</span>
+        </a>
+        <p class="mt-5 max-w-md text-sm leading-7 text-white/62">
+          火山と草原を安全に楽しむための、阿蘇山上広場・阿蘇山上ターミナル周辺ガイドです。
+        </p>
+        <p class="mt-5 text-xs leading-6 text-white/45">
+          掲載情報は現地の変更に追いつかない場合があります。規制標識と係員の案内を優先してください。
+        </p>
+      </div>
+
+      <div>
+        <h2 class="font-sans text-xs font-bold tracking-[0.18em] text-sulfur">GUIDE</h2>
+        <ul class="mt-5 grid gap-2 text-sm text-white/66">
+          {NAV_ITEMS.slice(1).map((item) => (
+            <li><a href={item.href} class="transition-colors hover:text-white">{item.label}</a></li>
+          ))}
+        </ul>
+      </div>
+
+      <div>
+        <h2 class="font-sans text-xs font-bold tracking-[0.18em] text-sulfur">INFORMATION</h2>
+        <ul class="mt-5 grid gap-2 text-sm text-white/66">
+          <li><a href="/privacy/" class="transition-colors hover:text-white">プライバシーポリシー</a></li>
+          <li><a href="/credits/" class="transition-colors hover:text-white">写真クレジット</a></li>
+          <li><a href="/status/" class="transition-colors hover:text-white">情報の更新について</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="mt-12 flex flex-col gap-3 border-t border-white/10 pt-6 text-[0.68rem] tracking-[0.06em] text-white/42 md:flex-row md:items-center md:justify-between">
+      <p>© {year} {SITE.name}</p>
+      <p>熊本県阿蘇市黒川・阿蘇山上エリア</p>
+    </div>
+  </div>
+</footer>

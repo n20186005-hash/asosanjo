@@ -1,0 +1,106 @@
+---
+import Icon from './Icon.astro';
+import { NAV_ITEMS, SITE } from '../config/site';
+
+const pathname = Astro.url.pathname;
+const isActive = (href: string) => href === '/' ? pathname === '/' : pathname.startsWith(href);
+---
+<header class="fixed inset-x-0 top-0 z-50 border-b border-white/10 bg-ink/92 text-white backdrop-blur-md" data-site-header>
+  <div class="site-container flex h-[4.75rem] items-center justify-between gap-6">
+    <a href="/" class="group flex items-center gap-3 text-white no-underline" aria-label={`${SITE.name} ホーム`}>
+      <span class="grid size-9 place-items-center border border-white/35 text-sulfur transition-colors group-hover:border-sulfur" aria-hidden="true">
+        <Icon name="mountain" size={20} />
+      </span>
+      <span>
+        <span class="block font-serif text-base tracking-[0.12em]">{SITE.name}</span>
+        <span class="block text-[0.58rem] tracking-[0.22em] text-white/55">ASO SANJO GUIDE</span>
+      </span>
+    </a>
+
+    <nav class="hidden items-center gap-6 lg:flex" aria-label="メインナビゲーション">
+      {NAV_ITEMS.map((item) => (
+        <a
+          href={item.href}
+          class:list={[
+            'relative py-2 text-[0.78rem] font-bold tracking-[0.08em] text-white/74 no-underline transition-colors hover:text-white',
+            isActive(item.href) && 'text-white after:absolute after:inset-x-0 after:-bottom-1 after:h-px after:bg-sulfur',
+          ]}
+          aria-current={isActive(item.href) ? 'page' : undefined}
+        >
+          {item.label}
+        </a>
+      ))}
+    </nav>
+
+    <div class="hidden lg:block">
+      <a href="/status/" class="inline-flex min-h-10 items-center gap-2 border border-white/30 px-4 text-[0.75rem] font-bold tracking-[0.08em] text-white no-underline transition-colors hover:border-sulfur hover:text-sulfur">
+        <span class="size-2 rounded-full bg-alert" aria-hidden="true"></span>
+        本日の案内
+      </a>
+    </div>
+
+    <button
+      type="button"
+      class="grid size-11 place-items-center border border-white/30 text-white lg:hidden"
+      aria-label="メニューを開く"
+      aria-expanded="false"
+      aria-controls="mobile-navigation"
+      data-menu-button
+    >
+      <span data-menu-open><Icon name="menu" size={22} /></span>
+      <span class="hidden" data-menu-close><Icon name="close" size={22} /></span>
+    </button>
+  </div>
+
+  <div id="mobile-navigation" class="hidden border-t border-white/10 bg-ink px-4 pb-6 pt-3 lg:hidden" data-mobile-menu>
+    <nav class="site-container grid" aria-label="モバイルナビゲーション">
+      {NAV_ITEMS.map((item) => (
+        <a
+          href={item.href}
+          class:list={[
+            'flex items-center justify-between border-b border-white/10 py-3.5 text-sm font-bold tracking-[0.08em] text-white/78 no-underline',
+            isActive(item.href) && 'text-sulfur',
+          ]}
+          aria-current={isActive(item.href) ? 'page' : undefined}
+        >
+          {item.label}
+          <Icon name="arrow" size={17} />
+        </a>
+      ))}
+    </nav>
+  </div>
+</header>
+
+<script>
+  const button = document.querySelector('[data-menu-button]');
+  const menu = document.querySelector('[data-mobile-menu]');
+  const openIcon = document.querySelector('[data-menu-open]');
+  const closeIcon = document.querySelector('[data-menu-close]');
+
+  if (button instanceof HTMLButtonElement && menu instanceof HTMLElement) {
+    const closeMenu = () => {
+      menu.classList.add('hidden');
+      button.setAttribute('aria-expanded', 'false');
+      button.setAttribute('aria-label', 'メニューを開く');
+      openIcon?.classList.remove('hidden');
+      closeIcon?.classList.add('hidden');
+    };
+
+    button.addEventListener('click', () => {
+      const isOpen = button.getAttribute('aria-expanded') === 'true';
+      if (isOpen) {
+        closeMenu();
+      } else {
+        menu.classList.remove('hidden');
+        button.setAttribute('aria-expanded', 'true');
+        button.setAttribute('aria-label', 'メニューを閉じる');
+        openIcon?.classList.add('hidden');
+        closeIcon?.classList.remove('hidden');
+      }
+    });
+
+    window.addEventListener('resize', () => {
+      if (window.innerWidth >= 1024) closeMenu();
+    });
+  }
+</script>

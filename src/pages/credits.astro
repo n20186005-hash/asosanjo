@@ -1,0 +1,36 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import Icon from '../components/Icon.astro';
+const credits = [
+  { use: 'トップ・パノラマ・OG画像', file: 'MountAsoCrater_from_Kusasenri_viewpoint.jpg', author: 'STA3816', license: 'CC BY-SA 3.0', url: 'https://commons.wikimedia.org/wiki/File:MountAsoCrater_from_Kusasenri_viewpoint.jpg', licenseUrl: 'https://creativecommons.org/licenses/by-sa/3.0/' },
+  { use: '中岳火口', file: 'Mt. Aso nakadake crater 阿蘇中岳火口 (456731526).jpg', author: 'Yamaguchi Yoshiaki', license: 'CC BY-SA 2.0', url: 'https://commons.wikimedia.org/wiki/File:Mt._Aso_nakadake_crater_%E9%98%BF%E8%98%87%E4%B8%AD%E5%B2%B3%E7%81%AB%E5%8F%A3_(456731526).jpg', licenseUrl: 'https://creativecommons.org/licenses/by-sa/2.0/' },
+  { use: '冬の草千里・中岳', file: 'Mount Nakadake from Kusasenri Rest House.JPG', author: 'そらみみ', license: 'CC BY-SA 3.0', url: 'https://commons.wikimedia.org/wiki/File:Mount_Nakadake_from_Kusasenri_Rest_House.JPG', licenseUrl: 'https://creativecommons.org/licenses/by-sa/3.0/' },
+  { use: '春先の草千里', file: '20240315 Kusasenrigahama 04.jpg', author: 'ノボホショコロトソ', license: 'CC BY-SA 4.0', url: 'https://commons.wikimedia.org/wiki/File:20240315_Kusasenrigahama_04.jpg', licenseUrl: 'https://creativecommons.org/licenses/by-sa/4.0/' },
+  { use: '池のある草千里', file: 'Kusasenrigahama, part of Mount Aso.JPG', author: '날개', license: 'CC BY-SA 3.0', url: 'https://commons.wikimedia.org/wiki/File:Kusasenrigahama,_part_of_Mount_Aso.JPG', licenseUrl: 'https://creativecommons.org/licenses/by-sa/3.0/' },
+];
+---
+<BaseLayout title="写真クレジット" description="サイト内で使用している阿蘇山・草千里の写真とライセンス情報。" noindex={true}>
+  <PageHero eyebrow="PHOTO CREDITS" title="写真クレジット" description="掲載写真は Wikimedia Commons で公開された作品を、各ライセンス条件に従ってトリミング・縮小・形式変換して使用しています。" compact={true} />
+  <section class="py-16 md:py-24">
+    <div class="site-container-narrow">
+      <div class="border-t hairline">
+        {credits.map((item, index) => (
+          <article class="grid gap-4 border-b hairline py-7 md:grid-cols-[3rem_1fr_auto] md:items-start md:gap-6">
+            <p class="font-serif text-lg text-earth">0{index + 1}</p>
+            <div>
+              <h2 class="font-sans text-base font-bold">{item.use}</h2>
+              <p class="mt-2 break-words text-sm leading-7 text-ink-soft">作品：{item.file}<br />作者：{item.author}<br />ライセンス：{item.license}</p>
+              <p class="mt-2 text-xs leading-6 text-ink-soft">変更：ページ用途に合わせた切り抜き、縮小、WebP/JPEG 変換、明暗調整。</p>
+            </div>
+            <div class="flex flex-wrap gap-2 md:flex-col">
+              <a href={item.url} target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 text-xs font-bold text-moss underline">原作品 <Icon name="external" size={14} /></a>
+              <a href={item.licenseUrl} target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 text-xs font-bold text-moss underline">利用条件 <Icon name="external" size={14} /></a>
+            </div>
+          </article>
+        ))}
+      </div>
+      <p class="mt-8 text-xs leading-7 text-ink-soft">各加工画像は元作品と同じ Creative Commons 表示—継承ライセンスの条件に従います。写真以外のサイトコード・文章とはライセンスが異なります。</p>
+    </div>
+  </section>
+</BaseLayout>

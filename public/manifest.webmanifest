@@ -1,0 +1,10 @@
+{
+  "name": "阿蘇山上ガイド",
+  "short_name": "阿蘇山上",
+  "lang": "ja",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f5f2e9",
+  "theme_color": "#242722",
+  "icons": [{ "src": "/icons/apple-touch-icon.png", "sizes": "180x180", "type": "image/png" }]
+}

@@ -1,0 +1,30 @@
+---
+interface Props {
+  eyebrow: string;
+  title: string;
+  description: string;
+  image?: string;
+  imageAlt?: string;
+  compact?: boolean;
+}
+
+const {
+  eyebrow,
+  title,
+  description,
+  image = '/images/panorama.webp',
+  imageAlt = '阿蘇山の火山地形',
+  compact = false,
+} = Astro.props;
+---
+<section class:list={['relative overflow-hidden border-b hairline', compact ? 'pt-32 pb-14 md:pt-40 md:pb-20' : 'pt-32 pb-20 md:pt-44 md:pb-28']}>
+  <div class="absolute inset-0 opacity-[0.10]" aria-hidden="true">
+    <img src={image} alt="" class="h-full w-full object-cover grayscale" />
+  </div>
+  <div class="absolute inset-0 bg-[linear-gradient(90deg,#f5f2e9_0%,rgba(245,242,233,.94)_52%,rgba(245,242,233,.72)_100%)]" aria-hidden="true"></div>
+  <div class="site-container relative">
+    <p class="eyebrow mb-5">{eyebrow}</p>
+    <h1 class="max-w-4xl text-4xl leading-[1.35] text-ink md:text-6xl lg:text-7xl">{title}</h1>
+    <p class="mt-7 max-w-2xl text-base leading-8 text-ink-soft md:text-lg md:leading-9">{description}</p>
+  </div>
+</section>

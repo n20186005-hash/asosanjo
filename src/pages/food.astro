@@ -1,0 +1,41 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import FoodCard from '../components/FoodCard.astro';
+import { FOOD_SPOTS } from '../data/content';
+---
+<BaseLayout title="周辺グルメ｜草千里ランチ・山上の軽食" description="阿蘇山上広場、草千里、阿蘇火山博物館、内牧温泉周辺の食事とカフェを、距離と使い方別に紹介します。">
+  <PageHero eyebrow="FOOD & REST" title="山上で食べる" description="広い阿蘇では「近く」が徒歩とは限りません。山上広場、草千里、下山後の三つに分けて、休憩と食事を組み立てます。" image="/images/kusasenri-pond.webp" />
+
+  <section class="py-16 md:py-24">
+    <div class="site-container">
+      <SectionHeading eyebrow="NEARBY FOOD" title="距離から選ぶ、六つの立ち寄り先。" description="営業時間・休業日は季節、天候、規制によって変わることがあります。遅い昼食を予定する場合は、営業終了時刻を早めに確認してください。" />
+      <div class="mt-12 border-b hairline">
+        {FOOD_SPOTS.map((spot, index) => <FoodCard spot={spot} index={index} />)}
+      </div>
+    </div>
+  </section>
+
+  <section class="border-y hairline bg-paper-deep/55 py-16 md:py-24">
+    <div class="site-container grid gap-12 lg:grid-cols-[.7fr_1.3fr] lg:gap-20">
+      <SectionHeading eyebrow="CHOOSING A PLACE" title="時間と移動手段で決める。" />
+      <div class="grid gap-px bg-ink/15 md:grid-cols-3">
+        {[
+          ['30分以内', 'ターミナル茶店', 'バス待ちや短い休憩。移動を増やさず、軽食とお土産を。'],
+          ['1〜2時間', '草千里で昼食', '博物館や草原散策と組み合わせ、あか牛料理やカフェを。'],
+          ['下山後', '内牧温泉方面', '人気店や乳製品の店へ。山上の最終便・日没と切り離して計画。'],
+        ].map(([time, title, text]) => (
+          <article class="bg-paper p-6"><p class="text-xs font-bold tracking-[0.14em] text-earth">{time}</p><h3 class="mt-4 text-xl">{title}</h3><p class="mt-3 text-sm leading-7 text-ink-soft">{text}</p></article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="py-16 md:py-24">
+    <div class="site-container-narrow border-l-2 border-sulfur pl-6 md:pl-9">
+      <h2 class="text-2xl md:text-3xl">山上で食事を逃さないために</h2>
+      <p class="mt-5 text-sm leading-8 text-ink-soft">山上の飲食施設は市街地より早く閉まる傾向があります。到着が午後になる日は、食事より先に営業終了時刻を確認し、非常用の飲み物や軽食も準備しておくと安心です。ゴミは持ち帰り、野生動物へ食べ物を与えないでください。</p>
+    </div>
+  </section>
+</BaseLayout>

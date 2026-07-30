@@ -1,0 +1,81 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import Icon from '../components/Icon.astro';
+---
+<BaseLayout title="見どころ｜阿蘇山上広場・中岳火口・草千里" description="阿蘇山上広場、阿蘇山上ターミナル、中岳火口、草千里、砂千里、阿蘇火山博物館の見どころを紹介します。">
+  <PageHero eyebrow="PLACES TO SEE" title="山上の見どころ" description="火山の荒々しさと、草原の静けさ。その間を移動しながら、阿蘇カルデラの大きさを身体で感じるエリアです。" image="/images/panorama.webp" />
+
+  <section id="sanjo" class="py-16 md:py-24">
+    <div class="site-container grid gap-12 lg:grid-cols-[.85fr_1.15fr] lg:items-center lg:gap-20">
+      <div>
+        <SectionHeading eyebrow="01 / ASO SANJO" title="阿蘇山上広場とターミナル" description="山上観光の乗り継ぎ点。バスの発着、休憩、軽食、買い物、当日の情報確認をまとめやすい場所です。火口へ急ぐ前に、ここで規制と帰りの時刻を確認してください。" />
+        <ul class="mt-7 grid gap-3 text-sm leading-7 text-ink-soft">
+          <li class="flex gap-3"><Icon name="check" size={17} class="mt-1 text-moss" />バス乗降と待合</li>
+          <li class="flex gap-3"><Icon name="check" size={17} class="mt-1 text-moss" />トイレ・軽食・お土産</li>
+          <li class="flex gap-3"><Icon name="check" size={17} class="mt-1 text-moss" />道路・火口・天候の確認</li>
+        </ul>
+      </div>
+      <div class="image-frame aspect-[16/10]"><img src="/images/kusasenri-dry.webp" alt="草千里の高台から見た阿蘇山上の景観" class="h-full w-full object-cover" loading="lazy" /></div>
+    </div>
+  </section>
+
+  <section id="nakadake" class="border-y hairline bg-ink py-16 text-white md:py-24">
+    <div class="site-container grid gap-12 lg:grid-cols-[1.1fr_.9fr] lg:items-center lg:gap-20">
+      <div class="image-frame aspect-[4/3]"><img src="/images/crater-card.webp" alt="阿蘇中岳第一火口の火口壁" class="h-full w-full object-cover" loading="lazy" /></div>
+      <div>
+        <p class="eyebrow text-sulfur!">02 / NAKADAKE</p>
+        <h2 class="mt-5 text-3xl leading-[1.45] text-white md:text-5xl">中岳第一火口</h2>
+        <p class="mt-6 text-sm leading-8 text-white/70">現在も活動を続ける火口。開放時には火口壁、湯だまり、噴煙を間近に見られますが、噴火警戒、火山ガス、風向き、天候により立入規制が行われます。</p>
+        <div class="mt-7 border-l-2 border-alert bg-white/5 px-5 py-4 text-sm leading-7 text-white/76">
+          火口は「到着すれば必ず見られる場所」ではありません。閉鎖時は規制区域へ近づかず、草千里や博物館を中心に行程を切り替えてください。
+        </div>
+        <a href="/status/" class="button-secondary mt-7 border-white/30! bg-transparent! text-white! hover:bg-white! hover:text-ink!">本日の規制を見る <Icon name="arrow" size={17} /></a>
+      </div>
+    </div>
+  </section>
+
+  <section id="kusasenri" class="py-16 md:py-24">
+    <div class="site-container">
+      <div class="grid gap-12 lg:grid-cols-[.7fr_1.3fr] lg:items-end lg:gap-20">
+        <SectionHeading eyebrow="03 / KUSASENRI" title="草千里ヶ浜" description="火口跡に広がる草原と池、放牧の風景。緑の季節だけでなく、草色の冬、霧の日、雪の日にも異なる輪郭が現れます。博物館と飲食施設が集まり、火口閉鎖時の中心拠点にもなります。" />
+        <div class="grid grid-cols-2 gap-3">
+          <div class="image-frame aspect-[3/4]"><img src="/images/kusasenri-pond.webp" alt="池と草原が広がる草千里ヶ浜" class="h-full w-full object-cover" loading="lazy" /></div>
+          <div class="image-frame mt-12 aspect-[3/4]"><img src="/images/winter.webp" alt="冬季の草千里と阿蘇中岳" class="h-full w-full object-cover" loading="lazy" /></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="sunasenri" class="border-y hairline bg-paper-deep/55 py-16 md:py-24">
+    <div class="site-container grid gap-12 md:grid-cols-2 md:gap-16">
+      <div>
+        <p class="eyebrow">04 / SUNASENRI</p>
+        <h2 class="mt-5 text-3xl md:text-4xl">砂千里ヶ浜</h2>
+        <p class="mt-5 text-sm leading-8 text-ink-soft">黒い火山砂と岩が続く、草千里とは対照的な地形です。立入可能な範囲は規制により変わるため、現地の柵や標識を越えないでください。</p>
+      </div>
+      <div>
+        <p class="eyebrow">05 / MUSEUM</p>
+        <h2 class="mt-5 text-3xl md:text-4xl">阿蘇火山博物館</h2>
+        <p class="mt-5 text-sm leading-8 text-ink-soft">火山の成り立ちや阿蘇の自然を学べる施設。濃霧、雨、火口閉鎖の日でも、山上の時間を無理なく組み立てられます。</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-16 md:py-24">
+    <div class="site-container">
+      <SectionHeading eyebrow="SEASONS" title="季節ごとに、準備を変える。" />
+      <div class="mt-10 grid gap-px bg-ink/15 sm:grid-cols-2 lg:grid-cols-4">
+        {[
+          ['春', '草原が少しずつ色づく季節。朝夕は冷え、風が強い日もあります。'],
+          ['夏', '緑が濃くなる一方、日差しと急な天候変化に注意。水分を用意します。'],
+          ['秋', '草色と低い光が火山地形を際立たせます。日没と最終バスが早く感じられます。'],
+          ['冬', '積雪・凍結・強風の季節。防寒と道路装備を最優先にします。'],
+        ].map(([season, text]) => (
+          <article class="bg-paper p-6"><p class="font-serif text-2xl text-earth">{season}</p><p class="mt-4 text-sm leading-7 text-ink-soft">{text}</p></article>
+        ))}
+      </div>
+    </div>
+  </section>
+</BaseLayout>

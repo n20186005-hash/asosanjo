@@ -1,0 +1,17 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+<BaseLayout title="ページが見つかりません" description="お探しのページは見つかりませんでした。" noindex={true}>
+  <section class="relative min-h-[720px] overflow-hidden bg-ink text-white">
+    <img src="/images/winter.webp" alt="霧と雪の阿蘇山" class="absolute inset-0 h-full w-full object-cover opacity-45" />
+    <div class="absolute inset-0 bg-ink/55"></div>
+    <div class="site-container relative flex min-h-[720px] items-center pt-20">
+      <div class="max-w-xl">
+        <p class="text-xs font-bold tracking-[0.2em] text-sulfur">404 / LOST IN THE MIST</p>
+        <h1 class="mt-5 text-5xl leading-[1.4] text-white md:text-7xl">霧の先に、<br />ページがありません。</h1>
+        <p class="mt-6 text-sm leading-8 text-white/70">URLが変更されたか、ページが削除された可能性があります。</p>
+        <a href="/" class="button-secondary mt-8 border-white/35! bg-white! text-ink!">山上広場へ戻る</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

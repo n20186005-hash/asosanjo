@@ -1,0 +1,38 @@
+---
+import Icon from './Icon.astro';
+
+interface Props { currentClosure?: boolean }
+const { currentClosure = true } = Astro.props;
+const points = [
+  { name: 'JR阿蘇駅', sub: '路線バスの起点', time: '約35分', icon: 'bus' as const },
+  { name: '草千里', sub: '草原・博物館・食事', time: '約5〜10分', icon: 'mountain' as const },
+  { name: '阿蘇山上広場', sub: 'ターミナル・休憩', time: '通常 約5分', icon: 'pin' as const },
+  { name: '中岳火口', sub: currentClosure ? '現在は見学不可' : '開放状況を確認', time: '', icon: 'alert' as const },
+];
+---
+<div class="mt-10 border-y hairline py-8" aria-label="阿蘇駅から中岳火口までの移動イメージ">
+  <ol class="grid gap-0 md:grid-cols-4">
+    {points.map((point, index) => (
+      <li class:list={[
+        'relative border-l hairline px-5 py-5 md:border-l-0 md:border-t',
+        index === points.length - 1 && currentClosure && 'bg-alert-soft/60',
+      ]}>
+        <span class:list={[
+          'absolute -left-[5px] top-8 size-2.5 rounded-full border-2 border-paper md:-top-[5px] md:left-5',
+          index === points.length - 1 && currentClosure ? 'bg-alert' : 'bg-moss-dark',
+        ]}></span>
+        <div class="flex items-start gap-3">
+          <span class:list={['mt-1 text-moss', index === points.length - 1 && currentClosure && 'text-alert']}>
+            <Icon name={point.icon} size={20} />
+          </span>
+          <div>
+            <p class="text-xs font-bold tracking-[0.14em] text-ink-soft">0{index + 1}</p>
+            <h3 class="mt-1 font-sans text-base font-bold tracking-[0.04em]">{point.name}</h3>
+            <p class="mt-1 text-xs leading-6 text-ink-soft">{point.sub}</p>
+            {index < points.length - 1 && <p class="mt-3 text-[0.68rem] font-bold text-earth">→ {point.time}</p>}
+          </div>
+        </div>
+      </li>
+    ))}
+  </ol>
+</div>

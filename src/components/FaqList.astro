@@ -1,0 +1,23 @@
+---
+import Icon from './Icon.astro';
+import { FAQ_ITEMS } from '../data/content';
+interface Props { limit?: number }
+const { limit } = Astro.props;
+const items = typeof limit === 'number' ? FAQ_ITEMS.slice(0, limit) : FAQ_ITEMS;
+---
+<div class="border-t hairline">
+  {items.map((item, index) => (
+    <details class="group border-b hairline">
+      <summary class="flex cursor-pointer list-none items-start justify-between gap-5 py-6 marker:content-none">
+        <span class="flex gap-4">
+          <span class="mt-1 font-serif text-sm text-earth">Q{String(index + 1).padStart(2, '0')}</span>
+          <span class="font-bold leading-7 tracking-[0.035em]">{item.question}</span>
+        </span>
+        <span class="mt-1 shrink-0 transition-transform group-open:rotate-180"><Icon name="chevron" size={18} /></span>
+      </summary>
+      <div class="pb-7 pl-12 pr-10 text-sm leading-8 text-ink-soft">
+        <p>{item.answer}</p>
+      </div>
+    </details>
+  ))}
+</div>
