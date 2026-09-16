@@ -4,7 +4,8 @@ import PageHero from '../components/PageHero.astro';
 import SectionHeading from '../components/SectionHeading.astro';
 import Icon from '../components/Icon.astro';
 ---
-<BaseLayout title="見どころ｜阿蘇山上広場・中岳火口・草千里" description="阿蘇山上広場、阿蘇山上ターミナル、中岳火口、草千里、砂千里、阿蘇火山博物館の見どころを紹介します。">
+
+<BaseLayout title="見どころ｜阿蘇山上広場・中岳火口・草千里" description="阿蘇山上広場、阿蘇山上ターミナル、中岳火口、草千里、砂千里、阿蘇火山博物館の見どころを紹介します。火山のしくみや背景、楽しみ方のマナーも案内します。">
   <PageHero eyebrow="PLACES TO SEE" title="山上の見どころ" description="火山の荒々しさと、草原の静けさ。その間を移動しながら、阿蘇カルデラの大きさを身体で感じるエリアです。" image="/images/panorama.webp" />
 
   <section id="sanjo" class="py-16 md:py-24">
@@ -59,6 +60,65 @@ import Icon from '../components/Icon.astro';
         <p class="eyebrow">05 / MUSEUM</p>
         <h2 class="mt-5 text-3xl md:text-4xl">阿蘇火山博物館</h2>
         <p class="mt-5 text-sm leading-8 text-ink-soft">火山の成り立ちや阿蘇の自然を学べる施設。濃霧、雨、火口閉鎖の日でも、山上の時間を無理なく組み立てられます。</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="border-y hairline bg-white/45 py-16 md:py-24">
+    <div class="site-container">
+      <SectionHeading eyebrow="HOW ASO WORKS" title="火山と草原のしくみ" description="見どころの背景にある、大地の仕組みをさりげなく。専門用語を抜き、体験につなげる視点で整理しました。" />
+      <div class="mt-10 grid gap-6 md:grid-cols-2">
+        {[
+          ['阿蘇カルデラ', '約9万〜3万年前の大規模噴火によってできた、周囲約120kmの巨大な凹地。外輪山に囲まれ、中央に中岳などの火丘群が残ります。'],
+          ['中岳の活動', '現在も噴煙と硫黄ガスを出す活火山。火口底に湯だまりが見えることもあり、噴火警戒レベルと風向きで立入が制限されます。'],
+          ['草原の成り立ち', '火山灰土壌と、長年の放牧（火消し）によって維持されてきた草原。すすきやミヤコグサが季節ごとに表情を変えます。'],
+          ['火山ガス', '風の弱い日はガスが谷や火口周辺に滞留しやすく、呼吸器への影響も。天候や規制と合わせて確認を。'],
+        ].map(([title, text], i) => (
+          <article class="border-t-2 border-moss p-1 pt-6">
+            <p class="font-serif text-sm text-earth">0{i + 1}</p>
+            <h3 class="mt-4 text-xl">{title}</h3>
+            <p class="mt-3 text-sm leading-7 text-ink-soft">{text}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="py-16 md:py-24">
+    <div class="site-container grid gap-12 lg:grid-cols-[.9fr_1.1fr] lg:items-center lg:gap-20">
+      <div class="image-frame aspect-[4/3]"><img src="/images/panorama.webp" alt="阿蘇山上広場周辺の草原と阿蘇山" class="h-full w-full object-cover" loading="lazy" /></div>
+      <div>
+        <SectionHeading eyebrow="BACKGROUND & STORIES" title="阿蘇山上の背景と伝承" description="古くから人の暮らしと向き合ってきた山。伝承と歴史を、事実と神話を分けてご案内します。" />
+        <dl class="mt-8 grid gap-5 text-sm">
+          <div class="border-t hairline pt-4"><dt class="font-bold text-moss">開拓の神話</dt><dd class="mt-2 leading-7 text-ink-soft">『日本書紀』などに、健磐龍命（たけいわたつすのみこと）が阿蘇を開拓したという伝承が伝わります。</dd></div>
+          <div class="border-t hairline pt-4"><dt class="font-bold text-moss">草千里の名</dt><dd class="mt-2 leading-7 text-ink-soft">「千里の草原」を意味するとされ、火口跡の平坦な草原にちなむといわれます（諸説あり）。</dd></div>
+          <div class="border-t hairline pt-4"><dt class="font-bold text-moss">火口の信仰と歴史</dt><dd class="mt-2 leading-7 text-ink-soft">火の神として崇められた山であり、近世には加藤清正による石工の伝承なども残ります。</dd></div>
+          <div class="border-t hairline pt-4"><dt class="font-bold text-moss">観光地として</dt><dd class="mt-2 leading-7 text-ink-soft">明治以降、鉄道やバスの整備とともに火山を間近で見る観光地として発展。阿蘇火山博物館は火山学の普及の拠点です。</dd></div>
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <section class="border-y hairline bg-paper-deep/55 py-16 md:py-24">
+    <div class="site-container">
+      <SectionHeading eyebrow="VISITOR RESPONSIBILITY" title="楽しみ方のマナー" description="火山と草原を、次の人へ残すために。守っていただきたい基本をまとめました。" />
+      <div class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {[
+          ['規制と標識を守る', '立入禁止の柵や標識は安全のため。絶対に越えず、係員の指示に従ってください。'],
+          ['火山ガスに配慮', '呼吸器・心臓の疾患、体調不良の方は火口周辺への立入りを避けてください。'],
+          ['ゴミは持ち帰る', '山上のゴミ箱は限られています。持ち込んだ分は必ず持ち帰りましょう。'],
+          ['自然を傷つけない', '草原や火口壁からの持ち出し、草木の損傷は控えてください。'],
+          ['野生動物との距離', '放牧の牛などには餌やりや過度な接近をせず、静かに観察しましょう。'],
+          ['火気に注意', '草原火災を防ぐため、たばこなどの火気取り扱いには十分注意してください。'],
+        ].map(([title, text]) => (
+          <div class="flex gap-3 border-t hairline pt-5">
+            <Icon name="check" size={18} class="mt-0.5 shrink-0 text-moss" />
+            <div>
+              <h3 class="text-base font-bold text-ink">{title}</h3>
+              <p class="mt-2 text-sm leading-7 text-ink-soft">{text}</p>
+            </div>
+          </div>
+        ))}
       </div>
     </div>
   </section>

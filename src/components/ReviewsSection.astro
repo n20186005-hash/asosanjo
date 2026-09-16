@@ -1,0 +1,43 @@
+---
+import Icon from './Icon.astro';
+import SectionHeading from './SectionHeading.astro';
+import { SITE } from '../config/site';
+
+const e = SITE.entity;
+const rating = e.rating;
+const reviewCount = e.reviewCount.toLocaleString('en-US');
+const fillPct = (rating / 5) * 100;
+const stars = Array.from({ length: 5 });
+---
+<section class="border-y hairline bg-paper-deep/40 py-20 md:py-28">
+  <div class="site-container">
+    <SectionHeading
+      eyebrow="GOOGLE MAPS REVIEWS"
+      title={`${e.fullNameJa}の評価`}
+      description={`Google マップのユーザー評価をもとに、訪れた方の声と評価スコアを紹介しています。`}
+    />
+
+    <div class="mt-10 grid items-stretch gap-8 rounded-sm border hairline bg-paper p-8 md:grid-cols-[auto_1fr] md:gap-12 md:p-10">
+      <div class="flex flex-col items-center justify-center gap-3 md:border-r md:border-ink/12 md:pr-12">
+        <p class="font-serif text-6xl leading-none text-ink">{rating.toFixed(1)}</p>
+        <div class="relative inline-flex text-2xl leading-none" role="img" aria-label={`評価 ${rating} / 5（5段階中）`}>
+          <div class="flex gap-1 text-ink/20" aria-hidden="true">{stars.map(() => '★')}</div>
+          <div class="absolute inset-y-0 left-0 flex gap-1 overflow-hidden text-sulfur" style={`width:${fillPct}%`} aria-hidden="true">{stars.map(() => '★')}</div>
+        </div>
+        <p class="text-sm text-ink-soft">{reviewCount} 件の評価</p>
+      </div>
+
+      <div class="flex flex-col justify-center">
+        <p class="text-sm leading-8 text-ink-soft">
+          {e.fullNameJa}（{e.fullNameEn}）の評価スコアと口コミ数は、Google マップ（Google Maps）のユーザー評価に基づいています（同期：{e.ratingSyncLabel}）。
+        </p>
+        <p class="mt-4 border-l-2 border-sulfur pl-4 text-xs leading-7 text-ink-soft">
+          本評価は Google マップのユーザー評価をもとに同期しています（同期日：{e.ratingSyncLabel}）。著作権は各投稿者および Google マップに帰属します。
+        </p>
+        <a href={e.mapsShareUrl} target="_blank" rel="noopener noreferrer" class="button-secondary mt-6 self-start">
+          Google マップですべての口コミを見る <Icon name="external" size={17} />
+        </a>
+      </div>
+    </div>
+  </div>
+</section>

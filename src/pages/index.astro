@@ -5,13 +5,18 @@ import SectionHeading from '../components/SectionHeading.astro';
 import StatusPanel from '../components/StatusPanel.astro';
 import RouteDiagram from '../components/RouteDiagram.astro';
 import FaqList from '../components/FaqList.astro';
+import ReviewsSection from '../components/ReviewsSection.astro';
+import LocationSection from '../components/LocationSection.astro';
+import SourcesSection from '../components/SourcesSection.astro';
+import WeatherSection from '../components/WeatherSection.astro';
 import { HIGHLIGHTS, FOOD_SPOTS } from '../data/content';
+import { faqSchema } from '../config/schema';
 ---
-<BaseLayout preloadImage="/images/hero.webp">
+<BaseLayout preloadImage="/images/hero.webp" extraSchemas={[faqSchema()]}>
   <section class="relative min-h-[760px] overflow-hidden bg-ink text-white md:min-h-[860px]">
     <picture class="absolute inset-0">
       <source media="(max-width: 767px)" srcset="/images/hero-mobile.webp" />
-      <img src="/images/hero.webp" alt="草千里の高台から望む阿蘇中岳の火山地形" class="h-full w-full object-cover" width="1920" height="1080" fetchpriority="high" />
+      <img src="/images/hero.webp" alt="阿蘇山上広場（Aso Sanjo）から望む中岳と草千里の火山地形" class="h-full w-full object-cover" width="1920" height="1080" fetchpriority="high" />
     </picture>
     <div class="absolute inset-0 bg-[linear-gradient(90deg,rgba(22,25,22,.83)_0%,rgba(22,25,22,.45)_55%,rgba(22,25,22,.18)_100%)]"></div>
     <div class="absolute inset-x-0 bottom-0 h-64 bg-linear-to-t from-ink/70 to-transparent"></div>
@@ -36,18 +41,23 @@ import { HIGHLIGHTS, FOOD_SPOTS } from '../data/content';
 
   <StatusPanel compact={true} />
 
+  <WeatherSection compact={true} />
+
   <section class="py-20 md:py-32">
     <div class="site-container grid items-center gap-14 lg:grid-cols-[.92fr_1.08fr] lg:gap-20">
       <div>
-        <SectionHeading eyebrow="ABOUT THE PLACE" title="山頂ではなく、山上の旅を整える場所。" description="阿蘇山上広場は、阿蘇駅からのバス、自家用車、草千里、中岳火口方面をつなぐ集散点です。隣接する阿蘇山上ターミナルには休憩や買い物の機能があり、山の状況を確認して次の行動を決められます。" />
+        <SectionHeading eyebrow="ABOUT THE PLACE" title="山頂ではなく、山上の旅を整える場所。" description="阿蘇山上広場は、阿蘇駅からのバス、自家用車、草千里、中岳火口方面をつなぐ集散点です。周囲約120kmの阿蘇カルデラの中央に位置し、長年の放牧が育てた草原が広がります。隣接する阿蘇山上ターミナルには休憩や買い物の機能があり、山の状況を確認して次の行動を決められます。" />
         <div class="mt-8 border-l-2 border-sulfur pl-5 text-sm leading-8 text-ink-soft">
           <p>火口はいつでも入れる場所ではありません。規制、火山ガス、濃霧、積雪によって行程を変える余白を持つことが、阿蘇山上を楽しむ基本です。</p>
         </div>
-        <a href="/guide/" class="button-ghost mt-8">山上の見どころへ <Icon name="arrow" size={17} /></a>
+        <div class="mt-8 flex flex-wrap gap-3">
+          <a href="/guide/" class="button-ghost">阿蘇の成り立ち・見どころへ <Icon name="arrow" size={17} /></a>
+          <a href="/plan/" class="button-ghost">季節とプランの読み方 <Icon name="arrow" size={17} /></a>
+        </div>
       </div>
       <figure class="relative pb-9 pl-0 md:pl-10">
         <div class="image-frame aspect-[4/3]">
-          <img src="/images/crater.webp" alt="阿蘇中岳第一火口の火口壁と湯だまり" class="h-full w-full object-cover transition-transform duration-700 hover:scale-[1.02]" loading="lazy" width="1280" height="853" />
+          <img src="/images/crater.webp" alt="阿蘇山上広場（Aso Sanjo）近くの阿蘇中岳第一火口の火口壁と湯だまり" class="h-full w-full object-cover transition-transform duration-700 hover:scale-[1.02]" loading="lazy" width="1280" height="853" />
         </div>
         <figcaption class="absolute bottom-0 left-0 border-l border-sulfur bg-paper px-5 py-3 text-[0.68rem] tracking-[0.1em] text-ink-soft md:left-1">NAKADAKE CRATER / 火口開放時の風景</figcaption>
       </figure>
@@ -85,7 +95,7 @@ import { HIGHLIGHTS, FOOD_SPOTS } from '../data/content';
   </section>
 
   <section class="relative min-h-[520px] overflow-hidden bg-ink text-white md:min-h-[650px]">
-    <img src="/images/panorama.webp" alt="草千里から広がる阿蘇山の火山地形" class="absolute inset-0 h-full w-full object-cover" loading="lazy" width="1440" height="850" />
+    <img src="/images/panorama.webp" alt="阿蘇山上広場（Aso Sanjo）周辺の草千里から広がる阿蘇山の火山地形" class="absolute inset-0 h-full w-full object-cover" loading="lazy" width="1440" height="850" />
     <div class="absolute inset-0 bg-ink/45"></div>
     <div class="site-container relative flex min-h-[520px] items-end py-16 md:min-h-[650px] md:py-24">
       <div class="max-w-2xl border-l border-sulfur pl-6 md:pl-9">
@@ -118,6 +128,10 @@ import { HIGHLIGHTS, FOOD_SPOTS } from '../data/content';
     </div>
   </section>
 
+  <ReviewsSection />
+
+  <LocationSection />
+
   <section class="border-y hairline bg-white/45 py-20 md:py-28">
     <div class="site-container grid gap-12 lg:grid-cols-[.65fr_1.35fr] lg:gap-20">
       <div>
@@ -127,6 +141,8 @@ import { HIGHLIGHTS, FOOD_SPOTS } from '../data/content';
       <FaqList limit={4} />
     </div>
   </section>
+
+  <SourcesSection />
 
   <section class="bg-moss-dark py-16 text-white md:py-20">
     <div class="site-container flex flex-col gap-8 md:flex-row md:items-center md:justify-between">

@@ -1,0 +1,47 @@
+---
+import Icon from './Icon.astro';
+import SectionHeading from './SectionHeading.astro';
+import { SITE } from '../config/site';
+
+const e = SITE.entity;
+---
+<section class="py-20 md:py-28">
+  <div class="site-container">
+    <SectionHeading
+      eyebrow="LOCATION & MAP"
+      title={`${e.fullNameJa}の場所・アクセス`}
+      description={`${e.cityJa}（${e.cityEn}）、${e.regionJa}の火山エリアに位置します。周辺には${e.nearbyLandmark1}や${e.nearbyLandmark2}などの見どころがあります。`}
+    />
+
+    <nav class="mt-8 flex flex-wrap items-center gap-x-3 gap-y-2 text-xs tracking-wide text-ink-soft" aria-label="所在地の階層">
+      <span class="font-bold text-ink">{e.fullNameJa}</span>
+      <span class="text-ink/30" aria-hidden="true">→</span>
+      <span>{e.cityJa}（{e.cityEn}）</span>
+      <span class="text-ink/30" aria-hidden="true">→</span>
+      <span>{e.regionJa}（{e.regionEn}）</span>
+      <span class="text-ink/30" aria-hidden="true">→</span>
+      <span>{e.countryJa}（{e.countryEn}）</span>
+    </nav>
+
+    <div class="mt-8 overflow-hidden border hairline bg-paper">
+      <iframe
+        src={e.mapsEmbedSrc}
+        width="600"
+        height="450"
+        class="h-[360px] w-full md:h-[520px]"
+        style="border:0;"
+        allowfullscreen
+        loading="lazy"
+        referrerpolicy="strict-origin-when-cross-origin"
+        title={`${e.fullNameJa}（${e.fullNameEn}）のGoogleマップ`}
+      ></iframe>
+    </div>
+
+    <div class="mt-6 flex flex-col gap-4 text-sm leading-7 text-ink-soft md:flex-row md:items-center md:justify-between">
+      <p>運行・規制などの公式情報は、以下の観光案内をご確認ください。</p>
+      <a href={e.govtTourismUrl} target="_blank" rel="noopener noreferrer" class="button-ghost shrink-0">
+        {e.countryJa}／{e.regionJa} 公式観光ポータル <Icon name="external" size={16} />
+      </a>
+    </div>
+  </div>
+</section>

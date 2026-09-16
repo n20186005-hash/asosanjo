@@ -1,0 +1,49 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import WeatherSection from '../components/WeatherSection.astro';
+
+const shareUrl = 'https://www.google.com/maps/place/?q=' + encodeURIComponent('阿蘇山上広場');
+---
+
+<BaseLayout
+  title="阿蘇山上の天気・7日予報｜服装と持ち物の目安"
+  description="阿蘇山上広場のリアルタイム天気と7日間予報。雨・風・寒暖差・紫外線から、今日の服装や持ち物、遊び方のアドバイスを表示します。"
+>
+  <PageHero
+    eyebrow="LIVE WEATHER"
+    title="阿蘇山上の天気"
+    description="山の天候は変わりやすいです。火口の開放状況と合わせて、出発前に確認してください。"
+    image="/images/panorama.webp"
+    imageAlt="阿蘇山上広場周辺の草原と阿蘇山の火山地形"
+  />
+
+  <WeatherSection />
+
+  <section class="border-y hairline bg-white/45 py-16 md:py-24">
+    <div class="site-container grid gap-10 md:grid-cols-2">
+      <div>
+        <h2 class="font-serif text-xl tracking-[0.05em] text-ink">天候と一緒に確認したい</h2>
+        <ul class="mt-5 space-y-3 text-sm leading-7 text-ink-soft">
+          <li>・中岳火口の開放状況は、風向きや火山ガスで変わります。</li>
+          <li>・濃霧や積雪で道路が通行止めになることもあります。</li>
+          <li>・バスの最終便を見落とさないよう、帰りも計画しましょう。</li>
+        </ul>
+        <div class="mt-6 flex flex-wrap gap-3">
+          <a href="/status/" class="button-primary">当日の案内を見る</a>
+          <a href="/access/" class="button-secondary">アクセスを調べる</a>
+        </div>
+      </div>
+      <div>
+        <h2 class="font-serif text-xl tracking-[0.05em] text-ink">観測地点について</h2>
+        <p class="mt-5 text-sm leading-8 text-ink-soft">
+          表示しているのは阿蘇山上広場（阿蘇山上ターミナル周辺）の天候予報です。山頂や火口付近はさらに風が強く、気温も低くなることがあります。実際の状況は現地の標識と係員の案内を優先してください。
+        </p>
+        <p class="mt-4 text-xs leading-6 text-ink-soft">
+          天候データは気象予測モデルに基づく推定値です。参考値としてご利用ください。
+        </p>
+        <a href={shareUrl} target="_blank" rel="noopener noreferrer" class="button-ghost mt-5">Google マップで地点を確認</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

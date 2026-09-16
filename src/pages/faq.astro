@@ -2,13 +2,9 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PageHero from '../components/PageHero.astro';
 import FaqList from '../components/FaqList.astro';
-import { FAQ_ITEMS } from '../data/content';
-const schema = {
-  '@context': 'https://schema.org', '@type': 'FAQPage',
-  mainEntity: FAQ_ITEMS.map((item) => ({ '@type': 'Question', name: item.question, acceptedAnswer: { '@type': 'Answer', text: item.answer } })),
-};
+import { faqSchema } from '../config/schema';
 ---
-<BaseLayout title="よくある質問｜火口・バス・駐車場・冬の道路" description="阿蘇山上広場について、火口見学、阿蘇駅からのバス、駐車場、草千里、雨、濃霧、冬の道路、火山ガスを回答します。" structuredData={schema}>
+<BaseLayout title="よくある質問｜火口・バス・駐車場・冬の道路" description="阿蘇山上広場について、火口見学、阿蘇駅からのバス、駐車場、草千里、雨、濃霧、冬の道路、火山ガスを回答します。" extraSchemas={[faqSchema()]}>
   <PageHero eyebrow="FREQUENTLY ASKED QUESTIONS" title="よくある質問" description="現地で迷いやすいことを、出発前に確認。状況が変わる情報は、当日の公式案内と現地表示を優先してください。" compact={true} />
   <section class="py-16 md:py-24"><div class="site-container-narrow"><FaqList /></div></section>
   <section class="border-y hairline bg-alert-soft py-12"><div class="site-container-narrow flex flex-col gap-5 md:flex-row md:items-center md:justify-between"><div><p class="text-xs font-bold tracking-[0.14em] text-alert">TODAY'S CONDITIONS</p><h2 class="mt-2 font-sans text-xl font-bold text-alert">火口・道路・バスの状態は別ページで確認できます。</h2></div><a href="/status/" class="button-primary shrink-0">本日の案内を見る</a></div></section>

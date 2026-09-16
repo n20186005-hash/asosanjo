@@ -1,0 +1,46 @@
+---
+import Icon from './Icon.astro';
+import { SITE } from '../config/site';
+
+const e = SITE.entity;
+---
+<section class="border-t hairline bg-ink py-16 text-white md:py-20">
+  <div class="site-container">
+    <p class="eyebrow text-sulfur">SOURCES & REFERENCES</p>
+    <h2 class="mt-4 font-sans text-2xl font-bold tracking-[0.08em] text-white md:text-3xl">資料・出典</h2>
+
+    <ul class="mt-8 grid gap-px bg-white/10 md:grid-cols-2">
+      <li class="bg-ink p-6 md:p-7">
+        <p class="text-xs font-bold tracking-[0.14em] text-sulfur">評価・口コミ</p>
+        <p class="mt-3 text-sm leading-7 text-white/72">同期日：{e.ratingSyncLabel}</p>
+        <p class="mt-3 border-l-2 border-sulfur pl-4 text-xs leading-7 text-white/60">
+          本評価は Google マップのユーザー評価をもとに同期しています（同期日：{e.ratingSyncLabel}）。著作権は各投稿者および Google マップに帰属します。
+        </p>
+        <a
+          href={e.mapsShareUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="mt-4 inline-flex items-center gap-2 text-sm font-bold text-sulfur no-underline transition-colors hover:text-white"
+        >
+          Google マップですべての口コミを見る <Icon name="external" size={16} />
+        </a>
+      </li>
+
+      <li class="bg-ink p-6 md:p-7">
+        <p class="text-xs font-bold tracking-[0.14em] text-sulfur">所在地・公式情報</p>
+        <p class="mt-3 text-sm leading-7 text-white/72">
+          {e.fullNameJa}（{e.fullNameEn}）<br />
+          {e.streetJa}・{e.cityJa}・{e.regionJa} {e.postalCode}
+        </p>
+        <a
+          href={e.govtTourismUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="mt-4 inline-flex items-center gap-2 text-sm font-bold text-sulfur no-underline transition-colors hover:text-white"
+        >
+          {e.countryJa}／{e.regionJa} 公式観光ポータル <Icon name="external" size={16} />
+        </a>
+      </li>
+    </ul>
+  </div>
+</section>

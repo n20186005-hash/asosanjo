@@ -1,10 +1,19 @@
 {
   "name": "阿蘇山上ガイド",
   "short_name": "阿蘇山上",
-  "lang": "ja",
+  "id": "/",
+  "scope": "/",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#f5f2e9",
   "theme_color": "#242722",
-  "icons": [{ "src": "/icons/apple-touch-icon.png", "sizes": "180x180", "type": "image/png" }]
+  "description": "阿蘇山上広場・阿蘇山上ターミナル周辺の旅案内。中岳火口の規制、アクセス、草千里をわかりやすく紹介します。",
+  "lang": "ja",
+  "orientation": "portrait-primary",
+  "categories": ["travel", "navigation"],
+  "icons": [
+    { "src": "/icons/favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" },
+    { "src": "/icons/favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "maskable" },
+    { "src": "/icons/apple-touch-icon.png", "sizes": "180x180", "type": "image/png" }
+  ]
 }

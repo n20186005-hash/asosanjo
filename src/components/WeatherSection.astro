@@ -1,0 +1,119 @@
+---
+import SectionHeading from './SectionHeading.astro';
+import { SITE } from '../config/site';
+import { fetchWeather, categorize, beaufort, buildAdvice, iconFor } from '../lib/weather';
+
+interface Props {
+  compact?: boolean;
+}
+
+const { compact = false } = Astro.props;
+const e = SITE.entity;
+
+const weather = await fetchWeather(e.latitude, e.longitude);
+const current = weather?.current ?? null;
+const forecast = weather?.forecast ?? [];
+const cat = current ? categorize(current.code) : null;
+const advice =
+  current && cat
+    ? buildAdvice({
+        ...cat,
+        tMax: current.tMax,
+        tMin: current.tMin,
+        precipProb: current.precipProb,
+        windMs: current.windMs,
+        uv: forecast[0]?.uv ?? 0,
+      })
+    : null;
+const bf = current ? beaufort(current.windMs) : null;
+---
+
+<section class:list={['border-y hairline', compact ? 'bg-paper-deep/40 py-16 md:py-20' : 'bg-paper-deep/40 py-20 md:py-28']}>
+  <div class="site-container">
+    <SectionHeading
+      eyebrow="LIVE WEATHER"
+      title={compact ? '阿蘇山上の天気' : '阿蘇山上の天気・7日予報'}
+      description={compact
+        ? '山の天候は変わりやすいです。出発前に今日の服装と持ち物を確認してください。'
+        : '気温・降水確率・風・紫外線から、今日の服装や持ち物、遊び方のアドバイスを自動で表示します。天候は変わりやすいため、火口の開放状況は「当日の案内」でもご確認ください。'}
+    />
+
+    {
+      current && advice && bf ? (
+        <div>
+          <div class="weather-current">
+            <div class="weather-current-main">
+              <span class="weather-icon" set:html={iconFor(current.category)}></span>
+              <div>
+                <div class="weather-temp">{current.temp}°</div>
+                <div class="weather-cond">{current.label}</div>
+              </div>
+            </div>
+            <div class="weather-meta">
+              <span>最高 <b>{current.tMax}°</b> / 最低 <b>{current.tMin}°</b></span>
+              <span>降水確率 <b>{current.precipProb}%</b></span>
+              <span>風 <b>{bf.label}（{current.windMs.toFixed(0)}m/s）</b></span>
+              <span>湿度 <b>{current.humidity}%</b></span>
+            </div>
+          </div>
+
+          {compact ? (
+            <div>
+              {[...advice.outfit, ...advice.activity, ...advice.items].slice(0, 3).map((line) => (
+                <p class="weather-compact-line">{line}</p>
+              ))}
+              {advice.risk && (
+                <div class="weather-risk">
+                  <strong>⚠ 注意・リスク</strong>{advice.risk}
+                </div>
+              )}
+              <a class="weather-compact-link" href="/weather/">7日間の天気と詳しいアドバイスを見る →</a>
+            </div>
+          ) : (
+            <div>
+              <div class="weather-forecast">
+                {forecast.map((day) => (
+                  <div class="weather-day">
+                    <div class="wd-date">{day.isToday ? '今日' : day.weekday}</div>
+                    <span class="wd-icon" set:html={iconFor(day.category)}></span>
+                    <div class="wd-temp"><b>{day.tMax}°</b> / {day.tMin}°</div>
+                    <div class="wd-pop">降水 {day.precipProb}%</div>
+                  </div>
+                ))}
+              </div>
+
+              <div class="weather-advice">
+                {advice.outfit.length > 0 && (
+                  <div class="weather-block">
+                    <h4>服装・行動の目安</h4>
+                    <ul>{advice.outfit.map((x) => <li>{x}</li>)}</ul>
+                  </div>
+                )}
+                {advice.activity.length > 0 && (
+                  <div class="weather-block">
+                    <h4>おすすめの過ごし方</h4>
+                    <ul>{advice.activity.map((x) => <li>{x}</li>)}</ul>
+                  </div>
+                )}
+                {advice.items.length > 0 && (
+                  <div class="weather-block">
+                    <h4>持ち物チェック</h4>
+                    <ul>{advice.items.map((x) => <li>{x}</li>)}</ul>
+                  </div>
+                )}
+              </div>
+
+              {advice.risk && (
+                <div class="weather-risk">
+                  <strong>⚠ 注意・リスク</strong>{advice.risk}
+                </div>
+              )}
+            </div>
+          )}
+        </div>
+      ) : (
+        <div class="weather-error">現在、天候データを取得できません。しばらくしてから再度ご確認ください。</div>
+      )
+    }
+  </div>
+</section>

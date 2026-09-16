@@ -3,21 +3,41 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import PageHero from '../components/PageHero.astro';
 import SectionHeading from '../components/SectionHeading.astro';
 import Icon from '../components/Icon.astro';
+
 const plans = [
   { time: '約1時間', title: '山上広場を短く歩く', steps: ['ターミナルで規制確認', '山上の眺めと写真', '茶店で休憩・お土産', '復路バスまたは車へ'], fit: '乗り継ぎ・短時間' },
   { time: '約3時間', title: '草千里と山上をつなぐ', steps: ['草千里を散策', '博物館または昼食', '山上広場へ移動', '開放時のみ火口方面へ'], fit: '初めての阿蘇' },
   { time: '半日', title: '火山の景観をゆっくり巡る', steps: ['午前に草千里', '博物館・昼食', '山上広場・砂千里', '下山後に内牧温泉方面'], fit: '車・余裕ある旅' },
+  { time: '全日', title: '阿蘇山上を一周する', steps: ['阿蘇駅からバスで山上', '草千里・博物館', '山上広場・開放時は火口', '砂千里を車窓', '内牧温泉で締め'], fit: '朝から夕方まで' },
+];
+
+const seasonRows = [
+  ['気温のめやす', '5–18℃', '18–28℃', '8–20℃', '-3–10℃'],
+  ['天候の傾向', '変わりやすく強風の日も', '夕立・雷雨に注意', '安定しやすい', '雪・凍結・強風'],
+  ['霧・視界', '朝霧がちらほら', '発生は少ない', '朝霧・夕方', '濃霧が多く展望きかず'],
+  ['草原と景観', '若草が萌える', '緑が濃く花盛り', '草紅葉と低い光', '枯芝と雪化粧'],
+  ['野生動物', '放牧が始まる', '牛と野鳥', '昆虫が少なく過ごしやすい', '野鳥・動物の足跡'],
+  ['火山ガス', '風の弱い日は注意', '風の弱い日は注意', '風の弱い日は注意', '風の弱い日は注意'],
+  ['おすすめ', '新緑散策', '夕涼みと博物館', '紅葉と展望', '雪景色と温泉'],
+  ['注意点', '寒暖差・強風', '熱中症・雷雨', '日没が早い', '道路の冬装備'],
+];
+
+const styles = [
+  { title: '親子家族', text: '阿蘇火山博物館で火山を学び、草千里をのんびり歩き、あか牛ランチとソフトで休憩。火口は火山ガスに注意して短時間、ベビーカーは舗装された区画が無難です。', tag: '小さな子と' },
+  { title: '写真・自然', text: '朝の草千里（逆光を避ける角度）、夕方の火口とパノラマ、霧の日の幻想的な風景。三脚と広角・望遠を担ぎ、天候の変化を待つ余白を持たせて。', tag: '景色を撮る' },
+  { title: '低体力・バリアフリー', text: 'ターミナル周辺の平坦部、博物館、車窓からの景観を中心に。長距離の徒歩や急坂は避け、バスと駐車場を活用して無理なく巡ります。', tag: '歩行を控えて' },
 ];
 ---
-<BaseLayout title="旅のプラン｜1時間・3時間・半日の阿蘇山上" description="阿蘇山上広場と草千里を、1時間、3時間、半日で巡るモデルプラン。火口閉鎖、雨、濃霧、冬の代替案も案内します。">
-  <PageHero eyebrow="TRAVEL PLANS" title="旅の組み立て方" description="阿蘇山上では、予定を詰めるより、状況に合わせて一つ減らせる計画が向いています。時間別の基本形から選んでください。" image="/images/hero.webp" />
+
+<BaseLayout title="旅のプラン｜1時間・3時間・半日・全日の阿蘇山上" description="阿蘇山上広場と草千里を、滞在時間と旅のスタイルから選ぶモデルプラン。季節の読み方、火口閉鎖・雨・濃霧・冬の代替案も案内します。">
+  <PageHero eyebrow="TRAVEL PLANS" title="旅の組み立て方" description="阿蘇山上では、予定を詰めるより、状況に合わせて一つ減らせる計画が向いています。時間別・季節別・旅のスタイルから選んでください。" image="/images/hero.webp" />
 
   <section class="py-16 md:py-24">
     <div class="site-container">
-      <SectionHeading eyebrow="TIME-BASED ROUTES" title="滞在時間から選ぶ。" />
-      <div class="mt-12 grid gap-px bg-ink/15 lg:grid-cols-3">
+      <SectionHeading eyebrow="TIME-BASED ROUTES" title="滞在時間から選ぶ。" description="共通のおすすめ形です。火口閉鎖時は、該当ステップを草千里か博物館へ置き換えてください。" />
+      <div class="mt-12 grid gap-px bg-ink/15 sm:grid-cols-2 lg:grid-cols-4">
         {plans.map((plan, index) => (
-          <article class="bg-paper p-7 md:p-9">
+          <article class="bg-paper p-7 md:p-8">
             <div class="flex items-center justify-between"><p class="font-serif text-sm text-earth">0{index + 1}</p><span class="border border-moss/25 px-3 py-1 text-xs font-bold text-moss">{plan.time}</span></div>
             <h2 class="mt-8 text-2xl leading-9">{plan.title}</h2>
             <ol class="mt-7 grid gap-0">
@@ -26,6 +46,50 @@ const plans = [
               ))}
             </ol>
             <p class="mt-8 border-t hairline pt-4 text-xs font-bold tracking-[0.1em] text-ink-soft">向いている人：{plan.fit}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="border-y hairline bg-paper-deep/55 py-16 md:py-24">
+    <div class="site-container">
+      <SectionHeading eyebrow="SEASONAL STRATEGY" title="季節の戦略表。" description="過去の平年値をもとにした目安（気象庁の長期気候統計などに基づく）です。年によって変動し、天上の天候はさらに変わりやすいため、参考値としてお使いください。" />
+      <div class="mt-10 overflow-x-auto">
+        <table class="w-full min-w-[640px] border-collapse text-sm">
+          <thead>
+            <tr>
+              <th class="border hairline bg-paper p-3 text-left text-xs font-bold tracking-[0.1em] text-ink-soft"></th>
+              <th class="border hairline bg-paper p-3 text-center font-serif text-lg text-earth">春</th>
+              <th class="border hairline bg-paper p-3 text-center font-serif text-lg text-earth">夏</th>
+              <th class="border hairline bg-paper p-3 text-center font-serif text-lg text-earth">秋</th>
+              <th class="border hairline bg-paper p-3 text-center font-serif text-lg text-earth">冬</th>
+            </tr>
+          </thead>
+          <tbody>
+            {seasonRows.map((row) => (
+              <tr>
+                <th class="border hairline bg-white/55 p-3 text-left text-xs font-bold tracking-[0.06em] text-moss">{row[0]}</th>
+                {row.slice(1).map((cell) => (
+                  <td class="border hairline bg-paper p-3 align-top leading-7 text-ink-soft">{cell}</td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-16 md:py-24">
+    <div class="site-container">
+      <SectionHeading eyebrow="CHOOSE BY STYLE" title="旅のスタイルで選ぶ。" description="同行者や体力に合わせて、無理のない回り方を。どのスタイルも「規制確認」と「最終バスの逆算」は共通です。" />
+      <div class="mt-12 grid gap-7 md:grid-cols-3">
+        {styles.map((item) => (
+          <article class="border-t-2 border-moss pt-6">
+            <span class="text-[0.65rem] font-bold tracking-[0.1em] text-moss">{item.tag}</span>
+            <h3 class="mt-3 text-2xl">{item.title}</h3>
+            <p class="mt-4 text-sm leading-8 text-ink-soft">{item.text}</p>
           </article>
         ))}
       </div>

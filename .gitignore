@@ -1,7 +1,23 @@
+# 依存関係・ビルド成果物
 node_modules/
 dist/
 .astro/
 .wrangler/
-.dev.vars
+.turbo/
+coverage/
+
+# 環境変数・シークレット（絶対にコミットしない）
 .env
+.env.*
+.dev.vars
+.dev.vars.*
+wrangler.toml
+
+# ローカル・OS 関連
 .DS_Store
+Thumbs.db
+*.log
+logs/
+
+# プロジェクト内の作業データ（アップロード不要）
+.codebuddy/

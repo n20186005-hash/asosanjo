@@ -6,9 +6,10 @@ import RouteDiagram from '../components/RouteDiagram.astro';
 import Icon from '../components/Icon.astro';
 import { SITE } from '../config/site';
 
-const MAP_EMBED_URL = 'https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3350.6897346522032!2d131.07399!3d32.8799276!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3540d8f343ab97f7%3A0xa7d0eb6e3ec8ba2d!2sAso%20Sanjo%20Public%20Square!5e0!3m2!1sja!2sJP!4v1785405959886!5m2!1sja!2sJP';
+const MAP_EMBED_URL = SITE.entity.mapsEmbedSrc;
 ---
-<BaseLayout title="アクセス｜阿蘇駅からのバス・車・駐車場" description="阿蘇山上広場へのアクセスを、阿蘇駅からの路線バス、自家用車、草千里からの移動に分けて案内します。">
+
+<BaseLayout title="アクセス｜空港・駅からのバス・車・駐車場" description="阿蘇山上広場へのアクセスを、熊本空港からの経路、阿蘇駅からの路線バス、自家用車、タクシー・レンタカー、周辺の施設に分けて案内します。">
   <PageHero eyebrow="ACCESS" title="山上への行き方" description="便数の限られた路線バスと、天候に左右される山道。行き方だけでなく、帰り方まで決めてから出発しましょう。" image="/images/kusasenri-dry.webp" imageAlt="春先の草千里と阿蘇山の山並み" />
 
   <section class="py-16 md:py-24">
@@ -36,13 +37,35 @@ const MAP_EMBED_URL = 'https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3350
 
   <section class="border-y hairline bg-paper-deep/55 py-16 md:py-24">
     <div class="site-container">
+      <SectionHeading eyebrow="FROM THE AIRPORT" title="空港から、山へ。" description="最寄りは「阿蘇くまもと空港」。山上までは移動手段の組み合わせで、おおむね90分が一つの目安です。" />
+      <div class="mt-10 grid gap-8 md:grid-cols-3">
+        <article class="border-t-2 border-moss pt-6">
+          <h3 class="text-xl">鉄道・バスで乗り継ぐ</h3>
+          <p class="mt-3 text-sm leading-7 text-ink-soft">空港から熊本駅へ（リムジンバス等で約40分）、豊肥本線（阿蘇ゆるくし号など）で阿蘇駅へ（約1時間20分）、阿蘇駅から阿蘇登山線バスで山上（約35分）。便数をつなぐ余裕を持たせて。</p>
+        </article>
+        <article class="border-t-2 border-moss pt-6">
+          <h3 class="text-xl">直通バスを使う</h3>
+          <p class="mt-3 text-sm leading-7 text-ink-soft">空港と阿蘇・高森を結ぶ九州横断バス等が、季節によって運行されることがあります。運行日や時刻は限られるため、事前の確認が必要です。</p>
+        </article>
+        <article class="border-t-2 border-moss pt-6">
+          <h3 class="text-xl">レンタカーで向かう</h3>
+          <p class="mt-3 text-sm leading-7 text-ink-soft">空港で車を借り、国道57号・県道を経由して山上へ。便数を気にせず動けますが、冬は冬用タイヤやチェーンが必要になる日があります。</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-16 md:py-24">
+    <div class="site-container">
       <div class="grid gap-14 lg:grid-cols-[1fr_1fr] lg:items-center lg:gap-20">
         <div class="image-frame aspect-[4/3]"><img src="/images/winter.webp" alt="冬の草千里から望む阿蘇中岳" class="h-full w-full object-cover" loading="lazy" width="1400" height="900" /></div>
         <div>
-          <SectionHeading eyebrow="BY CAR" title="車では、山の条件を優先する。" description="熊本市中心部からは約100分が一つの目安です。カーナビが通行止め区間へ案内する場合があるため、現地標識と係員の指示を優先してください。" />
+          <SectionHeading eyebrow="BY CAR / TAXI" title="車では、山の条件を優先する。" description="熊本市中心部からは約100分が一つの目安です。カーナビが通行止め区間へ案内する場合があるため、現地標識と係員の指示を優先してください。" />
           <dl class="mt-8 grid gap-5 text-sm">
             <div class="grid grid-cols-[6rem_1fr] border-t hairline pt-4"><dt class="font-bold">所在地</dt><dd class="text-ink-soft">{SITE.address}</dd></div>
             <div class="grid grid-cols-[6rem_1fr] border-t hairline pt-4"><dt class="font-bold">座標</dt><dd class="text-ink-soft">{SITE.coordinates.latitude}, {SITE.coordinates.longitude}</dd></div>
+            <div class="grid grid-cols-[6rem_1fr] border-t hairline pt-4"><dt class="font-bold">タクシー</dt><dd class="text-ink-soft">阿蘇駅から山上へ配車可能ですが、山上の待機台数は限られます。空港からは距離が長く料金も高めなため、事前予約が現実的です。</dd></div>
+            <div class="grid grid-cols-[6rem_1fr] border-t hairline pt-4"><dt class="font-bold">レンタカー</dt><dd class="text-ink-soft">最も自由度が高く、草千里・火口・内牧温泉を自在に周遊できます。冬の道路装備を最優先に。</dd></div>
             <div class="grid grid-cols-[6rem_1fr] border-t hairline pt-4"><dt class="font-bold">冬季</dt><dd class="text-ink-soft">積雪・凍結あり。冬用タイヤやチェーンが必要になる場合があります。</dd></div>
             <div class="grid grid-cols-[6rem_1fr] border-t hairline pt-4"><dt class="font-bold">濃霧</dt><dd class="text-ink-soft">急に視界が悪化します。無理に進まず、安全な場所で判断してください。</dd></div>
           </dl>
@@ -68,7 +91,7 @@ const MAP_EMBED_URL = 'https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3350
     </div>
   </section>
 
-  <section class="py-16 md:py-24">
+  <section class="border-y hairline bg-white/45 py-16 md:py-24">
     <div class="site-container">
       <SectionHeading eyebrow="PARKING" title="駐車場は、区画と現地表示を確認。" description="阿蘇山上広場と草千里では共通駐車券が案内され、普通車500円が目安となることがあります。一方、ターミナル周辺には案内の異なる区画もあるため、入口の料金表示を優先してください。" />
       <div class="mt-10 grid gap-6 md:grid-cols-3">
@@ -85,7 +108,28 @@ const MAP_EMBED_URL = 'https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3350
     </div>
   </section>
 
-  <section class="border-y hairline bg-white/45 py-16 md:py-24">
+  <section class="py-16 md:py-24">
+    <div class="site-container">
+      <SectionHeading eyebrow="SERVICES NEARBY" title="周辺の施設・サービス" description="山上で迷わないよう、トイレ・食事・宿泊・買い物・給油・充電のめやすをまとめました。店舗名は挙げず、種別でご案内します。" />
+      <div class="mt-10 grid gap-px bg-ink/15 md:grid-cols-2">
+        {[
+          ['トイレ', '山上広場・ターミナル・草千里・博物館に公衆トイレがあります。バス車内にはありません。'],
+          ['食事', '山上には軽食・ソフトクリーム・お土産を扱う店舗、草千里にはレストラン・カフェがあります。詳しくは「食べる」を参照してください。'],
+          ['宿泊', '山上の宿泊施設は限定的です。草千里周辺や内牧温泉・阿蘇温泉郷に旅館・ホテル・民宿などのタイプがあり、早朝から山上を楽しむなら山麓の宿が現実的です。'],
+          ['物販・買い物', 'ターミナルや草千里でお土産・飲料・軽用品を扱う店舗があります。大きなスーパー等は阿蘇市・南阿蘇村の山麓の街にあります。'],
+          ['給油', '山上近くにガソリンスタンドは少ないため、満タンで登るのが基本です。'],
+          ['充電（EV）', '電気自動車の充電設備は山麓の道の駅や施設に設置例がありますが、山上での充電は期待しないほうがよいでしょう。'],
+        ].map(([title, text]) => (
+          <div class="bg-paper p-6 md:p-7">
+            <h3 class="font-serif text-lg">{title}</h3>
+            <p class="mt-3 text-sm leading-7 text-ink-soft">{text}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="border-y hairline bg-paper-deep/55 py-16 md:py-24">
     <div class="site-container">
       <SectionHeading eyebrow="ROUTE OVERVIEW" title="移動の全体像" />
       <RouteDiagram />
