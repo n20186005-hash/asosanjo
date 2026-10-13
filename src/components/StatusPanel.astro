@@ -27,10 +27,11 @@ const levelClasses = {
             {MOUNTAIN_STATUS.alert.title}
           </h2>
           {!compact && <p class="mt-2 max-w-3xl text-sm leading-7 text-ink-soft">{MOUNTAIN_STATUS.alert.body}</p>}
+          <p class="mt-2 text-[0.68rem] tracking-[0.08em] text-ink-soft/80">掲載情報の更新日：{MOUNTAIN_STATUS.updatedAt}</p>
         </div>
       </div>
 
-      <div class:list={['grid gap-px overflow-hidden border border-alert/15 bg-alert/15', compact ? 'grid-cols-2 md:grid-cols-4 xl:min-w-[620px]' : 'grid-cols-2 lg:grid-cols-4']}>
+      <div class:list={['grid gap-px overflow-hidden border border-alert/15 bg-alert/15', compact ? 'grid-cols-2 md:grid-cols-3 xl:min-w-[760px] xl:grid-cols-5' : 'grid-cols-2 lg:grid-cols-3']}>
         {MOUNTAIN_STATUS.items.map((item) => (
           <div class="bg-paper px-4 py-3">
             <div class="flex items-center gap-2 text-[0.68rem] font-bold tracking-[0.08em] text-ink-soft">

@@ -1,0 +1,123 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import Icon from '../components/Icon.astro';
+import TopicFaq from '../components/TopicFaq.astro';
+import RouteDiagram from '../components/RouteDiagram.astro';
+import { SITE } from '../config/site';
+import { OFFICIAL_LINKS } from '../config/status';
+import { breadcrumbSchema, faqSchemaFor } from '../config/schema';
+
+const faqs = [
+  {
+    question: '阿蘇駅から阿蘇山上ターミナルまでどのくらいかかりますか？',
+    answer:
+      '産交バス「阿蘇登山線」で目安約35分です。草千里を経由して山上方面へ向かいます。混雑や道路状況で前後します。',
+  },
+  {
+    question: 'バスの料金はいくらですか？',
+    answer:
+      '運賃は区間・時期によって変わるため、産交バスの時刻表・運賃ページで事前確認してください。予約は不要の通常路線です。',
+  },
+  {
+    question: '最終便は何時ですか？',
+    answer:
+      '最終便は季節・曜日・時期で変わります。復路の最終便を必ず産交バスの時刻表で確認し、想定外の運休に備えて余裕を持った行程にしてください。',
+  },
+  {
+    question: '火口規制の日でもバスは動きますか？',
+    answer:
+      '阿蘇登山線は火口規制の有無とは別に運行しますが、天候・道路状況・災害で運休・区間変更となる場合があります。火口方面のシャトルとは別です。',
+  },
+  {
+    question: '阿蘇駅で昼食はできますか？',
+    answer:
+      '駅前に食事できる店舗は限られます。昼食は草千里または山上ターミナルで済ませ、帰りの時間に余裕を持つ計画が現実的です。',
+  },
+];
+
+const crumbs = [
+  { name: 'ホーム', url: new URL('/', SITE.url).toString() },
+  { name: '阿蘇駅からのバス', url: new URL('/aso-station-bus/', SITE.url).toString() },
+];
+---
+
+<BaseLayout
+  title="阿蘇駅から阿蘇山上ターミナル｜バス料金・時刻・最終便"
+  description="JR阿蘇駅前から産交バス「阿蘇登山線」で阿蘇山上ターミナルへ。所要約35分、時刻表・運賃・最終便の確認方法と、復路を先に決めるコツを紹介します。"
+  extraSchemas={[breadcrumbSchema(crumbs), faqSchemaFor(faqs)]}
+>
+  <PageHero
+    eyebrow="FROM ASO STATION"
+    title="阿蘇駅から山上ターミナルへのバス"
+    description="公共交通で阿蘇山上広場を目指すなら、JR阿蘇駅前から阿蘇登山線。行き方よりも先に、帰りの最終便を確認するのが鉄則です。"
+    image="/images/kusasenri-pond.webp"
+    imageAlt="草千里の池と阿蘇山"
+  />
+
+  <section class="py-16 md:py-24">
+    <div class="site-container">
+      <SectionHeading
+        eyebrow="BUS"
+        title="阿蘇登山線で、山へ。"
+        description="JR阿蘇駅前のバス乗り場から産交バス「阿蘇登山線」に乗車。草千里を経由して阿蘇山上ターミナルへ向かいます。所要は約35分が目安です。"
+      />
+      <div class="mt-10 grid gap-px bg-ink/15 md:grid-cols-4">
+        {[
+          ['乗車', '阿蘇駅前', '駅を出てバス乗り場へ'],
+          ['路線', '阿蘇登山線', '草千里経由・山上方面'],
+          ['目安', '約35分', '混雑や道路で変動'],
+          ['予約', '不要', '通常の路線バス'],
+        ].map(([label, value, note]) => (
+          <div class="bg-paper p-6">
+            <p class="text-[0.68rem] font-bold tracking-[0.14em] text-moss">{label}</p>
+            <p class="mt-4 font-serif text-xl">{value}</p>
+            <p class="mt-2 text-xs leading-6 text-ink-soft">{note}</p>
+          </div>
+        ))}
+      </div>
+      <div class="mt-7 flex flex-wrap gap-3">
+        <a href={OFFICIAL_LINKS.busTimetable} target="_blank" rel="noopener noreferrer" class="button-primary">
+          産交バス｜阿蘇登山線 時刻表 <Icon name="external" size={16} />
+        </a>
+        <a href={OFFICIAL_LINKS.bus} target="_blank" rel="noopener noreferrer" class="button-secondary">
+          産交バス｜阿蘇登山線のご案内 <Icon name="external" size={16} />
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="border-y hairline bg-paper-deep/55 py-16 md:py-24">
+    <div class="site-container">
+      <SectionHeading eyebrow="PLAN THE RETURN" title="復路を、先に決める。" description="山上のバスは本数が限られます。最終便を見落とすと、宿泊の手配やタクシー配車が必要になるため、帰りの時刻から逆算して計画してください。" />
+      <ol class="mt-10 grid gap-6">
+        {[
+          ['01', '時刻表で復路を確認', '産交バスの時刻表ページで山上ターミナル発の最終便と本数を確認します。'],
+          ['02', '規制と天候を確認', '火口規制・阿蘇山公園道路・山上の天候は別々に確認。運休や区間変更の可能性を考えます。'],
+          ['03', '食事と余裕を確保', '昼食は草千里か山上ターミナルで。最終便の30分前には乗り場へ戻れる余裕を持ちましょう。'],
+          ['04', '予備手段も押さえる', '悪天候で運休した場合に備え、山上の宿やタクシー配車の目安も頭に入れておきます。'],
+        ].map(([num, title, text]) => (
+          <li class="grid grid-cols-[3.5rem_1fr] gap-4 border-t hairline pt-5">
+            <span class="font-serif text-xl text-earth">{num}</span>
+            <div><h3 class="font-sans text-base font-bold">{title}</h3><p class="mt-2 text-sm leading-7 text-ink-soft">{text}</p></div>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <section class="py-16 md:py-24">
+    <div class="site-container">
+      <SectionHeading eyebrow="ROUTE OVERVIEW" title="移動の全体像" />
+      <RouteDiagram />
+      <div class="mt-7 flex flex-wrap gap-3">
+        <a href="/access/" class="button-ghost">アクセス全体の案内</a>
+        <a href="/aso-sanjo-terminal/" class="button-ghost">山上ターミナルの施設</a>
+        <a href="/status/" class="button-ghost">山の状況</a>
+      </div>
+    </div>
+  </section>
+
+  <TopicFaq items={faqs} title="バスでのアクセスに関するFAQ" />
+</BaseLayout>

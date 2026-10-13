@@ -6,8 +6,8 @@ import SectionHeading from '../components/SectionHeading.astro';
 import { MOUNTAIN_STATUS, OFFICIAL_LINKS } from '../config/status';
 const levelClasses = { open: 'status-open', limited: 'status-limited', closed: 'status-closed', check: 'status-check' };
 ---
-<BaseLayout title="本日の案内｜火口規制・道路・バス運行状況" description="阿蘇山上広場へ出発する前に確認したい、中岳火口、阿蘇山公園道路、火口シャトル、阿蘇登山線の案内です。">
-  <PageHero eyebrow="MOUNTAIN STATUS" title="本日の案内" description="火山は状況が変わる場所です。このページの案内だけでなく、出発直前と現地到着時にも公式情報と係員の案内を確認してください。" />
+<BaseLayout title="山の状況｜火口規制・阿蘇山公園道路・バス運行" description="阿蘇山上広場へ出発する前に確認したい、中岳火口の規制、阿蘇山公園道路、山上広場へ向かう道路、火口シャトル、阿蘇登山線の案内です。">
+  <PageHero eyebrow="MOUNTAIN STATUS" title="山の状況" description="火山は状況が変わる場所です。火口・道路・バスは別々の状況です。このページの案内だけでなく、出発直前と現地到着時にも公式情報と係員の案内を確認してください。" />
 
   <section class="py-16 md:py-24">
     <div class="site-container">
@@ -22,7 +22,7 @@ const levelClasses = { open: 'status-open', limited: 'status-limited', closed: '
         </div>
       </div>
 
-      <div class="mt-12 grid gap-px bg-ink/15 md:grid-cols-2">
+      <div class="mt-12 grid gap-px bg-ink/15 md:grid-cols-2 lg:grid-cols-3">
         {MOUNTAIN_STATUS.items.map((item) => (
           <article class="bg-paper p-7 md:p-9">
             <div class="flex items-center gap-3">
@@ -60,10 +60,12 @@ const levelClasses = { open: 'status-open', limited: 'status-limited', closed: '
     <div class="site-container-narrow">
       <SectionHeading eyebrow="OFFICIAL INFORMATION" title="最終判断は、公式案内と現地表示で。" description={MOUNTAIN_STATUS.sourceNote} />
       <div class="mt-9 grid gap-3 sm:grid-cols-2">
+        <a href={OFFICIAL_LINKS.volcano} target="_blank" rel="noopener noreferrer" class="button-secondary justify-between">阿蘇火山火口規制情報（公式） <Icon name="external" size={16} /></a>
         <a href={OFFICIAL_LINKS.crater} target="_blank" rel="noopener noreferrer" class="button-secondary justify-between">阿蘇市｜公園道路・火口規制 <Icon name="external" size={16} /></a>
         <a href={OFFICIAL_LINKS.bus} target="_blank" rel="noopener noreferrer" class="button-secondary justify-between">産交バス｜阿蘇登山線 <Icon name="external" size={16} /></a>
+        <a href={OFFICIAL_LINKS.busTimetable} target="_blank" rel="noopener noreferrer" class="button-secondary justify-between">産交バス｜時刻表 <Icon name="external" size={16} /></a>
       </div>
-      <p class="mt-5 text-xs leading-6 text-ink-soft">外部サイトは最新情報の確認に必要な公式ページのみ掲載しています。</p>
+      <p class="mt-5 text-xs leading-6 text-ink-soft">外部サイトは最新情報の確認に必要な公式ページのみ掲載しています。このページは自動でリアルタイム情報を取得していません。</p>
     </div>
   </section>
 </BaseLayout>

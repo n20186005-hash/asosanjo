@@ -1,0 +1,115 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import Icon from '../components/Icon.astro';
+import TopicFaq from '../components/TopicFaq.astro';
+import { SITE } from '../config/site';
+import { breadcrumbSchema, faqSchemaFor } from '../config/schema';
+
+const faqs = [
+  {
+    question: '阿蘇山上広場の駐車場は無料ですか？',
+    answer:
+      '阿蘇山上広場と草千里では共通駐車券が案内されることがあり、普通車500円が目安です。一方で、周辺には無料区画と有料区画が混在し、案内が異なる場合があります。必ず現地の料金表示を優先してください。',
+  },
+  {
+    question: '草千里と山上広場で駐車券は共通ですか？',
+    answer:
+      '共通券として案内されることがありますが、時期や運営状況によって変わります。両方に駐車する予定なら、受付や係員に当日の案内を確認するのが確実です。',
+  },
+  {
+    question: '繁忙期は満車になりますか？',
+    answer:
+      '草千里は博物館・飲食施設に近く、繁忙期やイベント時は混雑しやすい駐車場です。朝の早い時間に駐車し、その後の移動をバスや徒歩と組み合わせる方法もあります。',
+  },
+  {
+    question: '冬の駐車で注意することは？',
+    answer:
+      '積雪・凍結がある日は、駐車後の歩行も滑りやすくなります。冬用タイヤ・チェーンの用意に加え、朝の除雪状況を確認してから出発してください。',
+  },
+  {
+    question: 'EVの充電はできますか？',
+    answer:
+      '山上での充電は期待しないほうがよいでしょう。充電設備は山麓の道の駅や施設に設置例があります。',
+  },
+];
+
+const crumbs = [
+  { name: 'ホーム', url: new URL('/', SITE.url).toString() },
+  { name: '駐車場', url: new URL('/parking/', SITE.url).toString() },
+];
+---
+
+<BaseLayout
+  title="阿蘇山上広場の駐車場｜料金・無料・有料区画・混雑"
+  description="阿蘇山上広場・阿蘇山上ターミナル・草千里の駐車場を紹介。普通車500円が目安の有料区画と、無料区画の違い、繁忙期の混雑、冬の注意点までまとめました。"
+  extraSchemas={[breadcrumbSchema(crumbs), faqSchemaFor(faqs)]}
+>
+  <PageHero
+    eyebrow="PARKING"
+    title="阿蘇山上広場の駐車場ガイド"
+    description="駐車場は一か所ではありません。山上広場、ターミナル、草千里で区画と料金表示が異なるため、現地表示を最優先に確認してください。"
+    image="/images/kusasenri-pond.webp"
+    imageAlt="草千里の草原と池"
+  />
+
+  <section class="py-16 md:py-24">
+    <div class="site-container">
+      <SectionHeading
+        eyebrow="FEE"
+        title="料金の目安と、確認の順番。"
+        description="阿蘇山上広場と草千里では共通駐車券が案内され、普通車500円が目安となることがあります。ただし施設ごとに無料区画・有料区画の案内が異なる場合があるため、以下の順番で確認してください。"
+      />
+      <ol class="mt-10 grid gap-6">
+        {[
+          ['01', '現地の料金表示を見る', '入口の看板と係員の案内が正確です。Web の情報は古くなっている可能性があります。'],
+          ['02', '駐車区画を確認する', '山上広場、ターミナル、草千里で区画が分かれています。案内図のある場所から止めましょう。'],
+          ['03', '復路の時間を確保する', '山上は日没が早く、冬は16時台には暗くなります。食事と最終便を先に決めてから駐車位置を選びます。'],
+          ['04', '冬の装備を確認する', '積雪・凍結時は冬用タイヤやチェーンが必要。朝の除雪・道路状況を出発前に確認してください。'],
+        ].map(([num, title, text]) => (
+          <li class="grid grid-cols-[3.5rem_1fr] gap-4 border-t hairline pt-5">
+            <span class="font-serif text-xl text-earth">{num}</span>
+            <div><h3 class="font-sans text-base font-bold">{title}</h3><p class="mt-2 text-sm leading-7 text-ink-soft">{text}</p></div>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <section class="border-y hairline bg-paper-deep/55 py-16 md:py-24">
+    <div class="site-container">
+      <SectionHeading eyebrow="AREAS" title="三つのエリアの駐車事情。" />
+      <div class="mt-10 grid gap-6 md:grid-cols-3">
+        {[
+          ['阿蘇山上広場', '火口方面の手前にある集散エリア。規制時は進入できる範囲が変わります。', 'common'],
+          ['阿蘇山上ターミナル', 'バス乗降、休憩、買い物に便利。駐車区画の表示を確認してください。', 'terminal'],
+          ['草千里', '博物館・飲食施設に近く、繁忙期は混雑しやすい駐車場です。', 'kusasenri'],
+        ].map(([title, text]) => (
+          <article class="border-t-2 border-moss p-1 pt-6">
+            <h3 class="mt-4 text-xl">{title}</h3>
+            <p class="mt-3 text-sm leading-7 text-ink-soft">{text}</p>
+          </article>
+        ))}
+      </div>
+      <div class="mt-8 flex flex-wrap gap-3">
+        <a href="/access/" class="button-primary">アクセス全体の案内</a>
+        <a href="/aso-sanjo-terminal/" class="button-secondary">山上ターミナルの施設</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-16 md:py-24">
+    <div class="site-container-narrow border-l-2 border-sulfur pl-6 md:pl-9">
+      <h2 class="text-2xl md:text-3xl">ドライブ前のチェックリスト</h2>
+      <ul class="mt-5 grid gap-3 text-sm leading-7 text-ink-soft">
+        <li class="flex gap-3"><Icon name="check" size={17} class="mt-1 shrink-0 text-moss" />燃料は満タンで。山上近くにガソリンスタンドは少ありません。</li>
+        <li class="flex gap-3"><Icon name="check" size={17} class="mt-1 shrink-0 text-moss" />飲料・軽食を準備。山上の店舗は早く閉まる傾向があります。</li>
+        <li class="flex gap-3"><Icon name="check" size={17} class="mt-1 shrink-0 text-moss" />カーナビの通行止め案内より、現地標識と係員の指示を優先。</li>
+        <li class="flex gap-3"><Icon name="check" size={17} class="mt-1 shrink-0 text-moss" />日没時刻を確認。山上は平地より暗くなるのが早いです。</li>
+      </ul>
+    </div>
+  </section>
+
+  <TopicFaq items={faqs} title="駐車場に関するFAQ" />
+</BaseLayout>

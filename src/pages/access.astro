@@ -5,16 +5,30 @@ import SectionHeading from '../components/SectionHeading.astro';
 import RouteDiagram from '../components/RouteDiagram.astro';
 import Icon from '../components/Icon.astro';
 import { SITE } from '../config/site';
+import { OFFICIAL_LINKS } from '../config/status';
 
 const MAP_EMBED_URL = SITE.entity.mapsEmbedSrc;
 ---
 
-<BaseLayout title="アクセス｜空港・駅からのバス・車・駐車場" description="阿蘇山上広場へのアクセスを、熊本空港からの経路、阿蘇駅からの路線バス、自家用車、タクシー・レンタカー、周辺の施設に分けて案内します。">
-  <PageHero eyebrow="ACCESS" title="山上への行き方" description="便数の限られた路線バスと、天候に左右される山道。行き方だけでなく、帰り方まで決めてから出発しましょう。" image="/images/kusasenri-dry.webp" imageAlt="春先の草千里と阿蘇山の山並み" />
+<BaseLayout
+  title="阿蘇山上広場へのアクセス｜阿蘇駅からのバス・駐車場"
+  description="阿蘇山上広場への行き方を、阿蘇駅からの産交バス（阿蘇登山線）の時刻表・最終便、熊本空港から、自家用車、駐車場の無料・有料区画まで案内します。"
+>
+  <PageHero
+    eyebrow="ACCESS & PARKING"
+    title="阿蘇山上広場へのアクセス・駐車場"
+    description="便数の限られた路線バスと、天候に左右される山道。行き方だけでなく、帰りの最終便と駐車場の区画まで決めてから出発しましょう。"
+    image="/images/kusasenri-dry.webp"
+    imageAlt="春先の草千里と阿蘇山の山並み"
+  />
 
   <section class="py-16 md:py-24">
     <div class="site-container">
-      <SectionHeading eyebrow="PUBLIC TRANSPORT" title="阿蘇駅から、路線バスで。" description="公共交通なら、JR阿蘇駅前から阿蘇登山線で阿蘇山上ターミナルへ向かいます。所要は約35分が目安です。予約不要の通常路線ですが、便数は多くありません。" />
+      <SectionHeading
+        eyebrow="PUBLIC TRANSPORT"
+        title="阿蘇駅から、路線バスで。"
+        description="公共交通なら、JR阿蘇駅前から阿蘇登山線で阿蘇山上ターミナルへ向かいます。所要は約35分が目安です。予約不要の通常路線ですが、便数は多くありません。"
+      />
       <div class="mt-10 grid gap-px bg-ink/15 md:grid-cols-4">
         {[
           ['乗車', '阿蘇駅前', '駅を出てバス乗り場へ'],
@@ -29,8 +43,14 @@ const MAP_EMBED_URL = SITE.entity.mapsEmbedSrc;
           </div>
         ))}
       </div>
+      <div class="mt-7 flex flex-wrap gap-3">
+        <a href={OFFICIAL_LINKS.busTimetable} target="_blank" rel="noopener noreferrer" class="button-primary">
+          産交バス｜阿蘇登山線の時刻表 <Icon name="external" size={16} />
+        </a>
+        <a href="/aso-station-bus/" class="button-secondary">阿蘇駅から山上ターミナルまでの詳細</a>
+      </div>
       <div class="mt-7 border-l-2 border-sulfur pl-5 text-sm leading-8 text-ink-soft">
-        <p>山上のバス車内にはトイレがありません。天候や道路状況で運休・区間変更となる場合があるため、当日の運行案内を確認してください。</p>
+        <p>山上のバス車内にはトイレがありません。天候や道路状況で運休・区間変更となる場合があるため、当日の運行案内を確認してください。復路の最終便は季節と曜日で異なるため、時刻表で必ず確認してください。</p>
       </div>
     </div>
   </section>
@@ -93,7 +113,7 @@ const MAP_EMBED_URL = SITE.entity.mapsEmbedSrc;
 
   <section class="border-y hairline bg-white/45 py-16 md:py-24">
     <div class="site-container">
-      <SectionHeading eyebrow="PARKING" title="駐車場は、区画と現地表示を確認。" description="阿蘇山上広場と草千里では共通駐車券が案内され、普通車500円が目安となることがあります。一方、ターミナル周辺には案内の異なる区画もあるため、入口の料金表示を優先してください。" />
+      <SectionHeading eyebrow="PARKING" title="駐車場は、区画と現地表示を確認。" description="阿蘇山上広場と草千里では共通駐車券が案内され、普通車500円が目安となることがあります。一方、ターミナル周辺には案内の異なる区画（無料区画・有料区画）もあるため、入口の料金表示を優先してください。" />
       <div class="mt-10 grid gap-6 md:grid-cols-3">
         {[
           ['阿蘇山上広場', '火口方面の手前にある集散エリア。規制時は進入できる範囲が変わります。'],
@@ -104,6 +124,10 @@ const MAP_EMBED_URL = SITE.entity.mapsEmbedSrc;
             <p class="font-serif text-sm text-earth">0{i + 1}</p><h3 class="mt-4 text-xl">{title}</h3><p class="mt-3 text-sm leading-7 text-ink-soft">{text}</p>
           </article>
         ))}
+      </div>
+      <div class="mt-7 flex flex-wrap gap-3">
+        <a href="/parking/" class="button-primary">駐車場の詳細を見る <Icon name="car" size={17} /></a>
+        <a href="/aso-sanjo-terminal/" class="button-secondary">阿蘇山上ターミナルの施設情報</a>
       </div>
     </div>
   </section>

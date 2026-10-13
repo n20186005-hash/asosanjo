@@ -31,6 +31,13 @@ export function attractionSchema(canonical: string, image: string): JsonLd {
     hasMap: e.mapsShareUrl,
     sameAs: [e.mapsShareUrl, e.govtTourismUrl],
     touristType: ['自然観光', '火山景観', 'ドライブ', '公共交通旅行'],
+    aggregateRating: {
+      '@type': 'AggregateRating',
+      ratingValue: e.rating,
+      reviewCount: e.reviewCount,
+      bestRating: 5,
+      worstRating: 1,
+    },
   };
 }
 
@@ -42,6 +49,31 @@ export function faqSchema(): JsonLd {
       '@type': 'Question',
       name: item.question,
       acceptedAnswer: { '@type': 'Answer', text: item.answer },
+    })),
+  };
+}
+
+export function faqSchemaFor(items: { question: string; answer: string }[]): JsonLd {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: items.map((item) => ({
+      '@type': 'Question',
+      name: item.question,
+      acceptedAnswer: { '@type': 'Answer', text: item.answer },
+    })),
+  };
+}
+
+export function breadcrumbSchema(crumbs: { name: string; url: string }[]): JsonLd {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: crumbs.map((crumb, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      name: crumb.name,
+      item: crumb.url,
     })),
   };
 }

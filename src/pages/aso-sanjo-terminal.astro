@@ -1,0 +1,103 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import Icon from '../components/Icon.astro';
+import TopicFaq from '../components/TopicFaq.astro';
+import { SITE } from '../config/site';
+import { breadcrumbSchema, faqSchemaFor } from '../config/schema';
+
+const faqs = [
+  {
+    question: '阿蘇山上ターミナルと阿蘇山上広場は同じ場所ですか？',
+    answer:
+      '隣接していますが別の施設です。阿蘇山上広場は無料の休憩・集合スペースで、阿蘇山上ターミナルはバス乗り場、トイレ、売店、軽食、案内機能を持つ施設です。移動は徒歩で行き来できます。',
+  },
+  {
+    question: '阿蘇山上ターミナルには何がありますか？',
+    answer:
+      'バス乗降場、待合スペース、公衆トイレ、売店・軽食、お土産、観光案内があります。火口や道路の状況を係員に確認できる点も、この地点を使う大きな理由です。',
+  },
+  {
+    question: '阿蘇山上ターミナルの住所はどこですか？',
+    answer:
+      '産交バスの案内では「〒869-2225 熊本県阿蘇市黒川1808」とされています。なお阿蘇山上広場の Google マップ上の表記は「808 Kurokawa, Minamiaso, Aso District, Kumamoto」で、施設ごとの表記が異なります。ナビには座標（32.8799, 131.0740）を使うのが確実です。',
+  },
+  {
+    question: 'ターミナルから火口へ行けますか？',
+    answer:
+      '火口方面へは、規制状況と火口シャトルの運行状況しだいです。規制中は火口周辺へ近づけません。火口規制は中岳火口・公園道路・シャトルそれぞれ別に確認してください。',
+  },
+  {
+    question: 'バスを降りずに火口方面だけ見て帰れますか？',
+    answer:
+      '火口方面のバスは、規制時は運休となることがあります。火口へ向かうつもりなら、復路の最終便と規制状況を先に確認し、想定外の運休に備えた行程にしておきましょう。',
+  },
+];
+
+const crumbs = [
+  { name: 'ホーム', url: new URL('/', SITE.url).toString() },
+  { name: '阿蘇山上ターミナル', url: new URL('/aso-sanjo-terminal/', SITE.url).toString() },
+];
+---
+
+<BaseLayout
+  title="阿蘇山上ターミナルガイド｜施設・トイレ・バス乗り場・買い物"
+  description="阿蘇山上ターミナルの施設、トイレ、待合、売店、バス乗り場、山上広場との違いを紹介。火口・バス・道路の状況確認に使える拠点としての使い方をまとめました。"
+  extraSchemas={[breadcrumbSchema(crumbs), faqSchemaFor(faqs)]}
+>
+  <PageHero
+    eyebrow="ASO SANJO TERMINAL"
+    title="阿蘇山上ターミナル施設ガイド"
+    description="阿蘇山上広場に隣接する、バス・休憩・情報の拠点。火口・道路・バスの状況を確認してから次の行動を決えられる場所です。"
+    image="/images/kusasenri-dry.webp"
+    imageAlt="山上広場周辺から望む阿蘇山の山並み"
+  />
+
+  <section class="py-16 md:py-24">
+    <div class="site-container">
+      <SectionHeading
+        eyebrow="TERMINAL"
+        title="山上広場とターミナルは、別の施設。"
+        description="阿蘇山上広場は誰でも使える無料の休憩・集合スペースです。阿蘇山上ターミナルはその隣にあり、バス乗降、トイレ、売店、軽食、当日の情報確認を一手に引き受けます。ナビ設定では二つを混同しがちなので、座標での指定が確実です。"
+      />
+      <dl class="mt-10 grid gap-5 text-sm md:grid-cols-2">
+        <div class="border-t hairline pt-4"><dt class="font-bold">所在地の表記</dt><dd class="mt-1 text-ink-soft">産交バス案内：〒869-2225 熊本県阿蘇市黒川1808／Google マップ（山上広場）：808 Kurokawa, Minamiaso, Aso District, Kumamoto 869-2225</dd></div>
+        <div class="border-t hairline pt-4"><dt class="font-bold">座標</dt><dd class="mt-1 text-ink-soft">{SITE.coordinates.latitude}, {SITE.coordinates.longitude}</dd></div>
+        <div class="border-t hairline pt-4"><dt class="font-bold">バス</dt><dd class="mt-1 text-ink-soft">JR阿蘇駅前から阿蘇登山線で阿蘇山上ターミナル下車。目安約35分。</dd></div>
+        <div class="border-t hairline pt-4"><dt class="font-bold">車</dt><dd class="mt-1 text-ink-soft">阿蘇山公園道路経由。山上広場まで通行可とする案内（2026年9月2日安全確認後）ですが、当日の規制を確認。</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <section class="border-y hairline bg-paper-deep/55 py-16 md:py-24">
+    <div class="site-container">
+      <SectionHeading eyebrow="FACILITIES" title="そろっている施設と、使い方。" description="火口が閉鎖されていても、ターミナル周辺で十分に時間を使えます。雨や霧の日の予備ルートとしても覚えておきましょう。" />
+      <div class="mt-10 grid gap-px bg-ink/15 md:grid-cols-2 lg:grid-cols-3">
+        {[
+          ['バス乗降場', '阿蘇駅方面・草千里方面の路線バスが発着。復路の最終便確認はここが起点になります。'],
+          ['公衆トイレ', '山上で数少ないトイレの一つ。バス車内にはないため、乗車前に済ませておくと安心です。'],
+          ['売店・軽食', 'ソフトクリームや飲料、お土産。営業時間は天候・規制で変わるため、早めの確認を。'],
+          ['待合・休憩', '屋根のある待合スペース。強風や霧の日は、無理に外を歩かずここで判断するのも一案です。'],
+          ['情報案内', '道路・火口・バスの状況を係員に確認できます。出発前に最新案内を得る最後の拠点です。'],
+          ['駐車場', 'ターミナル周辺に駐車区画があります。無料区画・有料区画の表示を必ず確認してください。'],
+        ].map(([title, text]) => (
+          <article class="bg-paper p-6 md:p-7">
+            <h3 class="flex items-center gap-2 font-serif text-lg"><Icon name="check" size={17} class="text-moss" />{title}</h3>
+            <p class="mt-3 text-sm leading-7 text-ink-soft">{text}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <TopicFaq items={faqs} title="阿蘇山上ターミナルに関するFAQ" />
+
+  <section class="border-t hairline py-14">
+    <div class="site-container-narrow flex flex-wrap gap-3">
+      <a href="/access/" class="button-ghost">アクセス・駐車場の全体像</a>
+      <a href="/aso-crater-restrictions/" class="button-ghost">火口規制の詳細</a>
+      <a href="/food/" class="button-ghost">山上と草千里の食事</a>
+    </div>
+  </section>
+</BaseLayout>

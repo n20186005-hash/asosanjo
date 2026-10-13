@@ -1,0 +1,121 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import Icon from '../components/Icon.astro';
+import TopicFaq from '../components/TopicFaq.astro';
+import { SITE } from '../config/site';
+import { OFFICIAL_LINKS } from '../config/status';
+import { breadcrumbSchema, faqSchemaFor } from '../config/schema';
+
+const faqs = [
+  {
+    question: '阿蘇山 火口規制で中岳火口へ入れないのはなぜですか？',
+    answer:
+      '噴火警戒レベル、火山ガスの濃度、風向き、天候、道路状況によって立入規制が行われます。2026年9月以降も中岳第一火口の周辺約1kmは立入規制が続いています。',
+  },
+  {
+    question: '火口が閉まっていると山上広場にも行けませんか？',
+    answer:
+      '行けます。火口規制と山上広場への通行は別の問題です。阿蘇山公園道路は2026年9月2日の安全確認後、山上広場まで通行可能とする案内が出されています。火口より先（規制区域）には進めません。',
+  },
+  {
+    question: '火口シャトルは運行していますか？',
+    answer:
+      '火口規制に伴い運休しています。運行再開の案内は火口規制情報と事業者のページで確認してください。',
+  },
+  {
+    question: '阿蘇山公園道路は閉鎖中ですか？',
+    answer:
+      '山上広場まで通行可とする案内（2026年9月2日安全確認後）が出されていますが、火山の状況は変わります。出発前に阿蘇市と阿蘇火山火口規制情報の公式ページで確認してください。',
+  },
+  {
+    question: '火口へ行く前に準備することは？',
+    answer:
+      'マスクの着用、呼吸器・心臓に疾患がある方は立入りを避けること、防寒着や歩きやすい靴、日没前の行動が原則です。現地係員の指示に必ず従ってください。',
+  },
+];
+
+const crumbs = [
+  { name: 'ホーム', url: new URL('/', SITE.url).toString() },
+  { name: '火口規制情報', url: new URL('/aso-crater-restrictions/', SITE.url).toString() },
+];
+---
+
+<BaseLayout
+  title="阿蘇山 火口規制情報｜中岳火口へ行ける条件・シャトル・道路"
+  description="中岳火口の立入規制、阿蘇山公園道路、火口シャトルの運行情報を読み解くガイド。火口が閉まっていても山上広場へは行けるケースと、安全に見学する条件を紹介します。"
+  extraSchemas={[breadcrumbSchema(crumbs), faqSchemaFor(faqs)]}
+>
+  <PageHero
+    eyebrow="CRATER RESTRICTIONS"
+    title="阿蘇山の火口規制を読み解く"
+    description="火口規制・公園道路・山上広場・シャトルは、それぞれ別の状況です。「火口が閉まっているから山へ行けない」と誤解しないために、整理して確認しましょう。"
+    image="/images/crater.webp"
+    imageAlt="阿蘇中岳第一火口の火口壁"
+  />
+
+  <section class="py-16 md:py-24">
+    <div class="site-container">
+      <SectionHeading
+        eyebrow="HOW TO READ"
+        title="四つを、別々に確認する。"
+        description="火口が閉鎖されていても、草千里や山上ターミナルまで行ける場合があります。反対に、路線バスや道路が止まれば、山上広場そのものへ到達できないことがあります。"
+      />
+      <div class="mt-10 grid gap-px bg-ink/15 md:grid-cols-2">
+        {[
+          ['中岳火口の規制', 'closed', '中岳第一火口の周辺約1kmは立入規制が続いています。噴火警戒・火山ガス・風向きで範囲が変わります。'],
+          ['阿蘇山公園道路', 'limited', '2026年9月2日の安全確認後、山上広場まで通行可能とする案内。規制区域より先には進めません。'],
+          ['山上広場へ向かう道', 'check', '県道・アクセス道路の通行状況は阿蘇市と交通事業者の案内で確認。ナビより現地標識を優先。'],
+          ['火口シャトル', 'closed', '火口規制に伴い運休中。運行再開は事業者の案内で確認してください。'],
+        ].map(([label, level, note]) => (
+          <article class="bg-paper p-7 md:p-9">
+            <div class="flex items-center gap-3">
+              <span class:list={['status-dot', level === 'closed' ? 'status-closed' : level === 'limited' ? 'status-limited' : 'status-check']}></span>
+              <p class="text-xs font-bold tracking-[0.14em] text-ink-soft">{label}</p>
+            </div>
+            <p class="mt-4 text-sm leading-7 text-ink-soft">{note}</p>
+          </article>
+        ))}
+      </div>
+      <div class="mt-7 flex flex-wrap gap-3">
+        <a href="/status/" class="button-primary">山の状況まとめ</a>
+        <a href={OFFICIAL_LINKS.volcano} target="_blank" rel="noopener noreferrer" class="button-secondary">
+          阿蘇火山火口規制情報（公式） <Icon name="external" size={16} />
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="border-y hairline bg-paper-deep/55 py-16 md:py-24">
+    <div class="site-container grid gap-12 lg:grid-cols-[.7fr_1.3fr] lg:gap-20">
+      <SectionHeading eyebrow="IF CLOSED" title="火口が閉まっている日の楽しみ方。" />
+      <div class="grid gap-px bg-ink/15 md:grid-cols-3">
+        {[
+          ['山上広場', '噴煙を遠目に望めます。風向きによっては火山ガスが流れるため、係員の案内を守って短時間に。'],
+          ['草千里', '草原と池の散策、阿蘇火山博物館。火口の代わりにカルデラの規模を体感できます。'],
+          ['博物館・温泉', '雨や霧の日は博物館と下山後の温泉で無理なく。食事は草千里か内牧温泉方面で。'],
+        ].map(([title, text]) => (
+          <article class="bg-paper p-6"><h3 class="text-xl">{title}</h3><p class="mt-3 text-sm leading-7 text-ink-soft">{text}</p></article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="py-16 md:py-24">
+    <div class="site-container-narrow border-l-2 border-alert pl-6 md:pl-9">
+      <h2 class="text-2xl md:text-3xl">安全のための注意</h2>
+      <ul class="mt-5 grid gap-3 text-sm leading-7 text-ink-soft">
+        <li class="flex gap-3"><Icon name="alert" size={17} class="mt-1 shrink-0 text-alert" />呼吸器・心臓に疾患がある方、体調に不安がある方は火口周辺への立入りを避けてください。</li>
+        <li class="flex gap-3"><Icon name="alert" size={17} class="mt-1 shrink-0 text-alert" />規制区域には絶対に立ち入らず、係員の指示に従ってください。</li>
+        <li class="flex gap-3"><Icon name="alert" size={17} class="mt-1 shrink-0 text-alert" />日没前の行動を心がけ、濃霧・強風時は無理に進まず安全な場所で判断してください。</li>
+      </ul>
+      <div class="mt-7 flex flex-wrap gap-3">
+        <a href="/access/" class="button-ghost">アクセス・駐車場</a>
+        <a href="/guide/" class="button-ghost">見どころ全体</a>
+      </div>
+    </div>
+  </section>
+
+  <TopicFaq items={faqs} title="火口規制に関するFAQ" />
+</BaseLayout>

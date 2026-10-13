@@ -1,12 +1,32 @@
 export interface FoodSpot {
   name: string;
   area: string;
+  group: 'sanjo' | 'kusasenri' | 'downhill';
   access: string;
   hours: string;
+  price: string;
   specialties: string[];
   note: string;
   tag: string;
 }
+
+export const FOOD_GROUPS: { id: FoodSpot['group']; title: string; lead: string }[] = [
+  {
+    id: 'sanjo',
+    title: '山上広場で食べる',
+    lead: '阿蘇山上ターミナルに隣接する広場エリア。バスの待ち時間や短い休憩に、徒歩ですぐ寄れる軽食・カフェ・お土産があります。',
+  },
+  {
+    id: 'kusasenri',
+    title: '草千里でランチ',
+    lead: '山上広場から車・バスで5〜10分。あか牛料理やカフェが集まり、草原の景色と組み合わせて昼食を組みやすいエリアです。',
+  },
+  {
+    id: 'downhill',
+    title: '下山後に立ち寄る',
+    lead: '内牧温泉方面。人気店や乳製品の店が並び、山上観光とは時間を分けて計画するのが現実的です。',
+  },
+];
 
 export const HIGHLIGHTS = [
   {
@@ -33,8 +53,10 @@ export const FOOD_SPOTS: FoodSpot[] = [
   {
     name: '阿蘇山上ターミナル 茶店',
     area: '山上広場',
+    group: 'sanjo',
     access: '広場内・徒歩すぐ',
     hours: '9:00–17:00頃',
+    price: '軽食500円〜',
     specialties: ['火山灰ソフト', 'コーヒー', '熊本・阿蘇のお土産'],
     note: 'バス待ちや短い休憩に便利。営業時間は天候・規制により変わる場合があります。',
     tag: 'いちばん近い',
@@ -42,8 +64,10 @@ export const FOOD_SPOTS: FoodSpot[] = [
   {
     name: 'douce Nucca',
     area: '草千里',
+    group: 'kusasenri',
     access: '山上広場から車・バスで約5〜10分',
     hours: '11:00–17:00頃',
+    price: 'ランチ1,500円〜',
     specialties: ['あか牛ハンバーグ', 'ピザ', '洋食ランチ'],
     note: '草千里を眺めながらゆっくり食事をしたい日に。営業日は事前確認がおすすめです。',
     tag: '景色と洋食',
@@ -51,8 +75,10 @@ export const FOOD_SPOTS: FoodSpot[] = [
   {
     name: 'ニュー草千里',
     area: '草千里',
+    group: 'kusasenri',
     access: '草千里正面',
     hours: 'レストラン 11:00–15:00頃',
+    price: 'あか牛料理1,500円〜',
     specialties: ['あか牛料理', '郷土料理', 'カフェ・物産'],
     note: '食事、休憩、買い物を一か所でまとめやすい施設です。',
     tag: '家族旅行',
@@ -60,8 +86,10 @@ export const FOOD_SPOTS: FoodSpot[] = [
   {
     name: 'Cafe & Shop GRASS LAND',
     area: '阿蘇火山博物館',
+    group: 'kusasenri',
     access: '草千里・博物館内',
     hours: '10:00–17:00頃',
+    price: '軽食800円〜',
     specialties: ['高菜めし', '軽食', 'ASO MILKソフト'],
     note: '雨や霧の日、博物館と組み合わせやすいカフェです。',
     tag: '雨の日にも',
@@ -69,8 +97,10 @@ export const FOOD_SPOTS: FoodSpot[] = [
   {
     name: 'いまきん食堂',
     area: '内牧温泉',
+    group: 'downhill',
     access: '山上から車で下山',
     hours: '11:00–15:00頃',
+    price: 'あか牛丼1,000円〜',
     specialties: ['あか牛丼'],
     note: '人気店のため待ち時間を見込み、山上観光とは時間を分けて計画してください。',
     tag: '下山後',
@@ -78,8 +108,10 @@ export const FOOD_SPOTS: FoodSpot[] = [
   {
     name: 'ASO MILK FACTORY',
     area: '内牧温泉',
+    group: 'downhill',
     access: '山上から車で下山',
     hours: '9:30–18:00頃',
+    price: 'スイーツ500円〜',
     specialties: ['牛乳', 'チーズ', 'スイーツ', 'カフェ'],
     note: 'ドライブの締めくくりや、子ども連れの休憩先に向いています。',
     tag: 'スイーツ',
